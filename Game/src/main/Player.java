@@ -6,8 +6,8 @@ public class Player {
 
 	int coordsXPlayer;
 	int coordsYPlayer;
-	int tailTime = 200;
-	int movedelay = 100;
+	int tailTime = 35;
+	int movedelay = 5;
 	Map map;
 	Screen screen;
 	Console console;
@@ -15,23 +15,6 @@ public class Player {
 	public Player() {
 		coordsXPlayer = 1;
 		coordsYPlayer = 1;
-	}
-
-// changes the coordinates from player to the new position and prints it out on
-// the screen
-	private void setCoordsPlayer(int pCoordsXPlayer, int pCoordsYPlayer, char pInhalt) {
-		if (pCoordsXPlayer + 1 < Map.map.length && pCoordsYPlayer + 1 < Map.map[0].length && pCoordsXPlayer > 0
-				&& pCoordsYPlayer > 0) {
-			Map.map[coordsXPlayer][coordsYPlayer] = ' ';
-			screen.print(coordsXPlayer, coordsYPlayer);
-			Map.map[pCoordsXPlayer][pCoordsYPlayer] = pInhalt;
-			coordsXPlayer = pCoordsXPlayer;
-			coordsYPlayer = pCoordsYPlayer;
-			screen.print(coordsXPlayer, coordsYPlayer);
-		} else {
-			Map.map[coordsXPlayer][coordsYPlayer] = pInhalt;
-			screen.print(coordsXPlayer, coordsYPlayer);
-		}
 	}
 
 // new reference to the class Console
@@ -55,6 +38,23 @@ public class Player {
 			Thread.sleep(pDelay);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+
+// changes the coordinates from player to the new position and prints it out on
+// the screen
+	private void setCoordsPlayer(int pCoordsXPlayer, int pCoordsYPlayer, char pInhalt) {
+		if (pCoordsXPlayer + 1 < Map.map.length && pCoordsYPlayer + 1 < Map.map[0].length && pCoordsXPlayer > 0
+				&& pCoordsYPlayer > 0) {
+			Map.map[coordsXPlayer][coordsYPlayer] = ' ';
+			screen.print(coordsXPlayer, coordsYPlayer);
+			Map.map[pCoordsXPlayer][pCoordsYPlayer] = pInhalt;
+			coordsXPlayer = pCoordsXPlayer;
+			coordsYPlayer = pCoordsYPlayer;
+			screen.print(coordsXPlayer, coordsYPlayer);
+		} else {
+			Map.map[coordsXPlayer][coordsYPlayer] = pInhalt;
+			screen.print(coordsXPlayer, coordsYPlayer);
 		}
 	}
 

@@ -11,9 +11,6 @@ class Map {
 	Screen screen;
 	Player player;
 
-	public Map() {
-	}
-
 // creates the new array and saves the borders of the map into the new array
 	public void newMapArray() {
 		map = MapLoader.charsgetMap();

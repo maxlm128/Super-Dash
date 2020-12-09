@@ -11,6 +11,14 @@ public class KeyListener {
 	boolean listen = true;
 	String whatIsRunning = null;
 
+// Setter for Listen
+	public void setListen(boolean pListen) {
+		listen = pListen;
+		if (pListen) {
+			keyListener();
+		}
+	}
+
 // new Reference to the class Player
 	public void newPlayerReference(Player pPlayer) {
 		player = pPlayer;
@@ -25,17 +33,10 @@ public class KeyListener {
 	public void newConsoleReference(Console pConsole) {
 		console = pConsole;
 	}
+
 // new Reference to the class Screen
 	public void newScreenReference(Screen pScreen) {
 		screen = pScreen;
-	}
-
-//Setter for Listen
-	public void setListen(boolean pListen) {
-		listen = pListen;
-		if (pListen) {
-			keyListener();
-		}
 	}
 
 // Method delay to create a delay

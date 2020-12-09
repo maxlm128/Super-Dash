@@ -20,6 +20,7 @@ public class Screen {
 		map = pMap;
 	}
 
+// new Reference to the Class Menu
 	public void newMenuReference(Menu pMenu) {
 		menu = pMenu;
 	}
@@ -88,9 +89,9 @@ public class Screen {
 		}
 	}
 
+//requires an array and prints the array onto the screen with some settings in the console
 	public void printMenu(String[] pInhalt) {
 		console.fill(' ');
-		console.setFontSize(FontSize.LARGE);
 		console.setBGColor(Color.BLACK);
 		console.setFGColor(Color.RED);
 		console.setCursor(0, 1);
@@ -98,19 +99,20 @@ public class Screen {
 		console.print("                                     " + pInhalt[0] + "                                    ");
 		console.setFGColor(Color.WHITE);
 		for (int i = 1; i < pInhalt.length; i++) {
-			console.setCursor(3, 8 + i*2);
+			console.setCursor(3, 8 + i * 2);
 			console.print(" " + pInhalt[i]);
 		}
+		print(3, 10 + (menu.pCoordsXCursor * 2), '<');
+		print(14, 10 + (menu.pCoordsXCursor * 2), '>');
 	}
 
+//switches the settings for the console between the Game and the Menu
 	public void switchConsoleSettings(boolean isMenuActive) {
 		if (isMenuActive && flipFlop) {
 			console.setFontSize(FontSize.LARGE);
-			console.setFGColor(Color.WHITE);
 			flipFlop = false;
 		} else if (!isMenuActive && !flipFlop) {
 			console.setFontSize(FontSize.NORMAL);
-			console.setFGColor(Color.WHITE);
 			flipFlop = true;
 		}
 	}
