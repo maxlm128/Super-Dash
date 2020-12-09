@@ -7,7 +7,7 @@ public class Player {
 	int coordsXPlayer;
 	int coordsYPlayer;
 	int tailTime = 200;
-	int movedelay = 100;
+	int movedelay = 10;
 	Map map;
 	Screen screen;
 	Console console;

@@ -42,6 +42,8 @@ public class Launcher {
 		map.newMapArray();
 		menu.startMenu();
 		menu.moveCursor('w');
+//		keyListener.gameRunning = true;
+//		screen.printMap();
 		keyListener.keyListener();
 	}
 }

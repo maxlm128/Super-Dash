@@ -74,7 +74,6 @@ public class Menu {
 		}
 	}
 
-//executes the required methods to move the cursor and print it onto the screen
 	public void moveCursor(char pInputChar) {
 		switch (pInputChar) {
 		case 'w':

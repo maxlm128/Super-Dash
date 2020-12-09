@@ -48,7 +48,7 @@ public class KeyListener {
 	}
 
 // listens to the received Keypresses from the imported class Console and
-// executes doAction() or moveCursor() if the player pressed something
+// executes doAction() if the player pressed something
 	public void keyListener() {
 		char inputChar;
 		while (listen) {

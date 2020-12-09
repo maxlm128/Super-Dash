@@ -13,28 +13,24 @@ public class Menu {
 	String[] settingsMenu;
 	String[] credits;
 
-	
-//creating the Arrays for the Menus main ,settings and credits
 	public Menu() {
 		mainMenu = new String[4];
 		settingsMenu = new String[4];
 		credits = new String[4];
 	}
 
-// new Reference to the class Screen
 	public void newScreenReference(Screen pScreen) {
 		screen = pScreen;
 	}
-// new Reference to the class Console
+
 	public void newConsoleReference(Console pConsole) {
 		console = pConsole;
 	}
-// new Reference to the class KeyListener
+
 	public void newKeyListenerReference(KeyListener pKeyListener) {
 		keyListener = pKeyListener;
 	}
 
-//initializing the three Arrays and the variables
 	public void startMenu() {
 		mainMenu[0] = "SuperDash - Main Menu";
 		mainMenu[1] = "   Play   ";
@@ -53,7 +49,6 @@ public class Menu {
 		screen.printMenu(mainMenu);
 	}
 
-//changes the coords of the Cursor and prints it with the method print()
 	public void printChangedCoords(boolean isUp) {
 		screen.print(3, 10 + (pCoordsXCursor * 2), ' ');
 		screen.print(14, 10 + (pCoordsXCursor * 2), ' ');
@@ -66,7 +61,6 @@ public class Menu {
 		screen.print(14, 10 + (pCoordsXCursor * 2), '>');
 	}
 	
-//changes the maximum coords for the cursor and prints it with the method printChangedCoords()
 	public void changeMaxCoords(int pMaxCoords) {
 		maxCoords = pMaxCoords;
 		for(int i = maxCoords ;i < pCoordsXCursor;i++) {
@@ -74,7 +68,6 @@ public class Menu {
 		}
 	}
 
-//executes the required methods to move the cursor and print it onto the screen
 	public void moveCursor(char pInputChar) {
 		switch (pInputChar) {
 		case 'w':

@@ -53,7 +53,6 @@ public class Menu {
 		screen.printMenu(mainMenu);
 	}
 
-//changes the coords of the Cursor and prints it with the method print()
 	public void printChangedCoords(boolean isUp) {
 		screen.print(3, 10 + (pCoordsXCursor * 2), ' ');
 		screen.print(14, 10 + (pCoordsXCursor * 2), ' ');
@@ -66,7 +65,6 @@ public class Menu {
 		screen.print(14, 10 + (pCoordsXCursor * 2), '>');
 	}
 	
-//changes the maximum coords for the cursor and prints it with the method printChangedCoords()
 	public void changeMaxCoords(int pMaxCoords) {
 		maxCoords = pMaxCoords;
 		for(int i = maxCoords ;i < pCoordsXCursor;i++) {
@@ -74,7 +72,6 @@ public class Menu {
 		}
 	}
 
-//executes the required methods to move the cursor and print it onto the screen
 	public void moveCursor(char pInputChar) {
 		switch (pInputChar) {
 		case 'w':
