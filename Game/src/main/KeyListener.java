@@ -60,7 +60,7 @@ public class KeyListener {
 			}
 			if (whatIsRunning.equals("gameRunning")) {
 				player.trailTimer();
-				delay(player.movedelay);
+				delay(player.gameDelay);
 			}
 			if (inputChar != 0 && !whatIsRunning.equals("gameRunning")) {
 				screen.switchConsoleSettings(true);

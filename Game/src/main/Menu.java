@@ -8,8 +8,10 @@ public class Menu {
 	Console console;
 	Player player;
 	KeyListener keyListener;
-	int pCoordsXCursor = 1;
+	int coordsXCursor = 1;
 	int maxCoords;
+	int localTailTime = 20;
+	int localGameSpeed = 20;
 	String[] mainMenu;
 	String[] settingsMenu;
 	String[] credits;
@@ -17,12 +19,12 @@ public class Menu {
 // initializing the three Arrays and the variables
 	public void startMenu() {
 		mainMenu[0] = "SuperDash - Main Menu";
-		mainMenu[1] = "   Play   ";
-		mainMenu[2] = " Settings ";
-		mainMenu[3] = " Credits   ";
+		mainMenu[1] = "   Play       ";
+		mainMenu[2] = " Settings     ";
+		mainMenu[3] = " Credits       ";
 		settingsMenu[0] = " Settings ";
-		settingsMenu[1] = "TrailTime   "  + player.tailTime;
-		settingsMenu[2] = "GameSpeed   "  + player.movedelay;
+		settingsMenu[1] = "TrailTime   " + localTailTime;
+		settingsMenu[2] = "GameSpeed   " + localGameSpeed;
 		settingsMenu[3] = "          ";
 		credits[0] = "Credits";
 		credits[1] = " Asecave";
@@ -30,6 +32,8 @@ public class Menu {
 		credits[3] = "        ";
 		keyListener.whatIsRunning = "mainMenuRunning";
 		maxCoords = 2;
+		player.setGameDelay(localGameSpeed);
+		player.setTailTime(localTailTime);
 		screen.printMenu(mainMenu);
 	}
 
@@ -62,21 +66,21 @@ public class Menu {
 
 //changes the coords of the Cursor and prints it with the method print()
 	public void printChangedCoords(boolean isUp) {
-		screen.print(3, 10 + (pCoordsXCursor * 2), ' ');
-		screen.print(14, 10 + (pCoordsXCursor * 2), ' ');
+		screen.print(3, 10 + (coordsXCursor * 2), ' ');
+		screen.print(14, 10 + (coordsXCursor * 2), ' ');
 		if (isUp) {
-			pCoordsXCursor--;
+			coordsXCursor--;
 		} else {
-			pCoordsXCursor++;
+			coordsXCursor++;
 		}
-		screen.print(3, 10 + (pCoordsXCursor * 2), '<');
-		screen.print(14, 10 + (pCoordsXCursor * 2), '>');
+		screen.print(3, 10 + (coordsXCursor * 2), '<');
+		screen.print(14, 10 + (coordsXCursor * 2), '>');
 	}
 
 //changes the maximum coords for the cursor and prints it with the method printChangedCoords()
 	public void changeMaxCoords(int pMaxCoords) {
 		maxCoords = pMaxCoords;
-		for (int i = maxCoords; i < pCoordsXCursor; i++) {
+		for (int i = maxCoords; i < coordsXCursor; i++) {
 			printChangedCoords(true);
 		}
 	}
@@ -85,47 +89,55 @@ public class Menu {
 	public void moveCursor(char pInputChar) {
 		switch (pInputChar) {
 		case 'w':
-			if (pCoordsXCursor == 0) {
+			if (coordsXCursor == 0) {
 				break;
 			}
 			printChangedCoords(true);
 			break;
 		case 's':
-			if (pCoordsXCursor == maxCoords) {
+			if (coordsXCursor == maxCoords) {
 				break;
 			}
 			printChangedCoords(false);
 			break;
 		case 'd':
-			if (pCoordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning")) {
-				player.tailTime++;
+			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning")) {
+				localTailTime++;
+				player.setTailTime(localTailTime);
+				settingsMenu[1] = "TrailTime   " + localTailTime;
+				screen.printMenu(settingsMenu);
+				break;
+			} else if (coordsXCursor == 1 && keyListener.whatIsRunning.equals("settingsMenuRunning")) {
+				localGameSpeed++;
+				player.setGameDelay(localGameSpeed);
+				settingsMenu[2] = "GameSpeed   " + localGameSpeed;
+				screen.printMenu(settingsMenu);
+				break;
 			}
-			if (pCoordsXCursor == 1 && keyListener.whatIsRunning.equals("settingsMenuRunning")) {
-				player.movedelay++;
-			}
-			settingsMenu[1] = "TrailTime   "  + player.tailTime;
-			screen.printMenu(settingsMenu);
-			break;
 		case 'a':
-			if (pCoordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning")) {
-				player.movedelay--;
+			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning")) {
+				localTailTime--;
+				player.setTailTime(localTailTime);
+				settingsMenu[1] = "TrailTime   " + localTailTime;
+				screen.printMenu(settingsMenu);
+				break;
+			} else if (coordsXCursor == 1 && keyListener.whatIsRunning.equals("settingsMenuRunning")) {
+				localGameSpeed--;
+				player.setGameDelay(localGameSpeed);
+				settingsMenu[2] = "GameSpeed   " + localGameSpeed;
+				screen.printMenu(settingsMenu);
+				break;
 			}
-			if (pCoordsXCursor == 1 && keyListener.whatIsRunning.equals("settingsMenuRunning")) {
-				player.tailTime--;
-			}
-			settingsMenu[2] = "GameSpeed   "  + player.movedelay;
-			screen.printMenu(settingsMenu);
-			break;
 		case 13:
-			if (pCoordsXCursor == 0 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
+			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
 				keyListener.whatIsRunning = "gameRunning";
 				screen.switchConsoleSettings(false);
 				screen.printMap();
-			} else if (pCoordsXCursor == 1 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
+			} else if (coordsXCursor == 1 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
 				changeMaxCoords(1);
 				screen.printMenu(settingsMenu);
 				keyListener.whatIsRunning = "settingsMenuRunning";
-			} else if (pCoordsXCursor == 2 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
+			} else if (coordsXCursor == 2 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
 				changeMaxCoords(1);
 				screen.printMenu(credits);
 				keyListener.whatIsRunning = "creditsMenuRunning";
