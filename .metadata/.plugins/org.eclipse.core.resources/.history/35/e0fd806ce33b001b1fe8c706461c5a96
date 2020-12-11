@@ -5,7 +5,6 @@ import com.asecave.Console;
 public class Menu {
 
 	Screen screen;
-	Console console;
 	Player player;
 	KeyListener keyListener;
 	int coordsXCursor = 1;
@@ -52,11 +51,6 @@ public class Menu {
 // new Reference to the class Screen
 	public void newScreenReference(Screen pScreen) {
 		screen = pScreen;
-	}
-
-// new Reference to the class Console
-	public void newConsoleReference(Console pConsole) {
-		console = pConsole;
 	}
 
 // new Reference to the class KeyListener

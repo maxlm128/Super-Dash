@@ -8,6 +8,7 @@ class Map {
 	static char[][] map;
 	static int[][] trailMap;
 	Console console;
+	Screen screen;
 	Player player;
 
 // creates the new array and saves the borders of the map into the new array

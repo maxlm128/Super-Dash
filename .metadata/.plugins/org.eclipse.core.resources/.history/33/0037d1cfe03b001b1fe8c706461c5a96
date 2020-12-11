@@ -23,8 +23,8 @@ public class Menu {
 		mainMenu[2] = " Settings     ";
 		mainMenu[3] = " Credits       ";
 		settingsMenu[0] = " Settings ";
-		settingsMenu[1] = "TrailTime   " + localTailTime;
-		settingsMenu[2] = "GameSpeed   " + localGameSpeed;
+		settingsMenu[1] = "TrailTime   " + localTailTime +"s";
+		settingsMenu[2] = "GameSpeed   " + localGameSpeed +"s";
 		settingsMenu[3] = "          ";
 		credits[0] = "Credits";
 		credits[1] = " Asecave";
@@ -115,7 +115,6 @@ public class Menu {
 				screen.printMenu(settingsMenu);
 				break;
 			}
-			break;
 		case 'a':
 			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning") && localTailTime > 1) {
 				localTailTime--;
@@ -131,7 +130,6 @@ public class Menu {
 				screen.printMenu(settingsMenu);
 				break;
 			}
-			break;
 		case 13:
 			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
 				keyListener.whatIsRunning = "gameRunning";
@@ -154,7 +152,6 @@ public class Menu {
 				screen.printMenu(mainMenu);
 				keyListener.whatIsRunning = "mainMenuRunning";
 			}
-			break;
 		}
 	}
 }

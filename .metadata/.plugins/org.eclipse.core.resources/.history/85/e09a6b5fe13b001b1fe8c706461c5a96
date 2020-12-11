@@ -29,6 +29,7 @@ public class Launcher {
 		screen.newConsoleReference(console);
 		screen.newMenuReference(menu);
 		player.newConsoleReference(console);
+		player.newMapReference(map);
 		player.newScreenReference(screen);
 		keyListener.newConsoleReference(console);
 		keyListener.newPlayerReference(player);
@@ -42,6 +43,6 @@ public class Launcher {
 		map.newMapArray();
 		menu.startMenu();
 		menu.moveCursor('w');
-		keyListener.gameLoop();
+		keyListener.keyListener();
 	}
 }

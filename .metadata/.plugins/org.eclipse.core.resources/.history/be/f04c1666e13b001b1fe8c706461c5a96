@@ -9,13 +9,13 @@ public class KeyListener {
 	Menu menu;
 	Screen screen;
 	boolean listen = true;
-	String whatIsRunning;
+	String whatIsRunning = null;
 
 // Setter for Listen
 	public void setListen(boolean pListen) {
 		listen = pListen;
 		if (pListen) {
-			gameLoop();
+			keyListener();
 		}
 	}
 

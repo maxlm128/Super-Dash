@@ -9,13 +9,13 @@ public class KeyListener {
 	Menu menu;
 	Screen screen;
 	boolean listen = true;
-	String whatIsRunning;
+	String whatIsRunning = null;
 
 // Setter for Listen
 	public void setListen(boolean pListen) {
 		listen = pListen;
 		if (pListen) {
-			gameLoop();
+			keyListener();
 		}
 	}
 
@@ -50,7 +50,7 @@ public class KeyListener {
 
 // listens to the received Keypresses from the imported class Console and
 // executes doAction() or moveCursor() if the player pressed something
-	public void gameLoop() {
+	public void keyListener() {
 		char inputChar;
 		while (listen) {
 			inputChar = console.getInputChar();

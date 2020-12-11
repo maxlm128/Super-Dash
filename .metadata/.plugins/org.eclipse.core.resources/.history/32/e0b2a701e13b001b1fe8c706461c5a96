@@ -115,7 +115,6 @@ public class Menu {
 				screen.printMenu(settingsMenu);
 				break;
 			}
-			break;
 		case 'a':
 			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning") && localTailTime > 1) {
 				localTailTime--;
@@ -131,7 +130,6 @@ public class Menu {
 				screen.printMenu(settingsMenu);
 				break;
 			}
-			break;
 		case 13:
 			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
 				keyListener.whatIsRunning = "gameRunning";
@@ -154,7 +152,6 @@ public class Menu {
 				screen.printMenu(mainMenu);
 				keyListener.whatIsRunning = "mainMenuRunning";
 			}
-			break;
 		}
 	}
 }

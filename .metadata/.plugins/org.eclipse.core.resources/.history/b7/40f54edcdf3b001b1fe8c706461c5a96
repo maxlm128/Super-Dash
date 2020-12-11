@@ -101,37 +101,37 @@ public class Menu {
 			printChangedCoords(false);
 			break;
 		case 'd':
-			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning") && localTailTime < 99) {
+			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning") && localTailTime < 99
+					&& localTailTime > 1) {
 				localTailTime++;
 				player.setTailTime(localTailTime);
 				settingsMenu[1] = "TrailTime   " + localTailTime;
 				screen.printMenu(settingsMenu);
 				break;
 			} else if (coordsXCursor == 1 && keyListener.whatIsRunning.equals("settingsMenuRunning")
-					&& localGameSpeed < 99) {
+					&& localGameSpeed < 99 && localGameSpeed > 1) {
 				localGameSpeed++;
 				player.setGameDelay(localGameSpeed);
 				settingsMenu[2] = "GameSpeed   " + localGameSpeed;
 				screen.printMenu(settingsMenu);
 				break;
 			}
-			break;
 		case 'a':
-			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning") && localTailTime > 1) {
+			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning") && localTailTime < 99
+					&& localTailTime > 1) {
 				localTailTime--;
 				player.setTailTime(localTailTime);
 				settingsMenu[1] = "TrailTime   " + localTailTime;
 				screen.printMenu(settingsMenu);
 				break;
 			} else if (coordsXCursor == 1 && keyListener.whatIsRunning.equals("settingsMenuRunning")
-					&& localGameSpeed > 1) {
+					&& localGameSpeed < 99 && localGameSpeed + 1 > 0) {
 				localGameSpeed--;
 				player.setGameDelay(localGameSpeed);
 				settingsMenu[2] = "GameSpeed   " + localGameSpeed;
 				screen.printMenu(settingsMenu);
 				break;
 			}
-			break;
 		case 13:
 			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
 				keyListener.whatIsRunning = "gameRunning";
@@ -154,7 +154,6 @@ public class Menu {
 				screen.printMenu(mainMenu);
 				keyListener.whatIsRunning = "mainMenuRunning";
 			}
-			break;
 		}
 	}
 }
