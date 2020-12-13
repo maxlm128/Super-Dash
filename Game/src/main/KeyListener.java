@@ -59,7 +59,7 @@ public class KeyListener {
 				player.doAction(inputChar);
 			}
 			if (whatIsRunning.equals("gameRunning")) {
-				player.trailTimer();
+				player.tailTimer();
 				delay(player.gameDelay);
 			}
 			if (inputChar != 0 && !whatIsRunning.equals("gameRunning")) {

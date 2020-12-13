@@ -10,6 +10,8 @@ public class Player {
 	int gameDelay;
 	Screen screen;
 	Console console;
+	KeyListener keyListener;
+	Menu menu;
 
 	public Player() {
 		coordsXPlayer = 1;
@@ -21,9 +23,19 @@ public class Player {
 		console = pConsole;
 	}
 
+// new Reference to the class keyListener
+	public void newKeyListenerReference(KeyListener pKeyListener) {
+		keyListener = pKeyListener;
+	}
+
 // new reference to the class Screen
 	public void newScreenReference(Screen pScreen) {
 		screen = pScreen;
+	}
+	
+// new Reference to the class Menu
+	public void newMenuReference(Menu pMenu) {
+		menu = pMenu;
 	}
 
 // method delay to create a delay
@@ -34,15 +46,15 @@ public class Player {
 			e.printStackTrace();
 		}
 	}
-	
+
 //setter for tailTime ,but with a short calculation
-	public void setTailTime(int pLocalTailTime) {
-		tailTime = pLocalTailTime * gameDelay;
+	public void setTailTime(int pLocalTailLength) {
+		tailTime = pLocalTailLength * gameDelay;
 	}
-	
+
 //setter for gameDelay ,but with a short calculation
 	public void setGameDelay(int pLocalGameSpeed) {
-		gameDelay = 100/pLocalGameSpeed;
+		gameDelay = 100 / pLocalGameSpeed;
 	}
 
 // changes the coordinates from player to the new position and prints it out on
@@ -65,7 +77,7 @@ public class Player {
 // looks for an integer in the array trailmap and sets every value thats over 
 //0 one lower and if the integer reaches 0, the trail is deleted from the 
 //screen by executing the method printTrail()
-	public void trailTimer() {
+	public void tailTimer() {
 		for (int x = 0; x < Map.trailMap.length; x++) {
 			for (int y = 0; y < Map.trailMap[0].length; y++) {
 				if (Map.trailMap[x][y] >= 1) {
@@ -104,7 +116,7 @@ public class Player {
 				}
 				setCoordsPlayer(coordsXPlayer, coordsYPlayer - 1, 'v');
 				Map.trailMap[coordsXPlayer][coordsYPlayer + 1] = tailTime;
-				trailTimer();
+				tailTimer();
 				screen.print(coordsXPlayer, coordsYPlayer);
 				screen.printTrail(coordsXPlayer, coordsYPlayer + 1, true);
 				delay(gameDelay);
@@ -118,7 +130,7 @@ public class Player {
 				}
 				setCoordsPlayer(coordsXPlayer - 1, coordsYPlayer, '>');
 				Map.trailMap[coordsXPlayer + 1][coordsYPlayer] = tailTime;
-				trailTimer();
+				tailTimer();
 				screen.print(coordsXPlayer, coordsYPlayer);
 				screen.printTrail(coordsXPlayer + 1, coordsYPlayer, true);
 				delay(gameDelay);
@@ -132,7 +144,7 @@ public class Player {
 				}
 				setCoordsPlayer(coordsXPlayer, coordsYPlayer + 1, '^');
 				Map.trailMap[coordsXPlayer][coordsYPlayer - 1] = tailTime;
-				trailTimer();
+				tailTimer();
 				screen.print(coordsXPlayer, coordsYPlayer);
 				screen.printTrail(coordsXPlayer, coordsYPlayer - 1, true);
 				delay(gameDelay);
@@ -146,12 +158,18 @@ public class Player {
 				}
 				setCoordsPlayer(coordsXPlayer + 1, coordsYPlayer, '<');
 				Map.trailMap[coordsXPlayer - 1][coordsYPlayer] = tailTime;
-				trailTimer();
+				tailTimer();
 				screen.print(coordsXPlayer, coordsYPlayer);
 				screen.printTrail(coordsXPlayer - 1, coordsYPlayer, true);
 				delay(gameDelay);
 				console.getInputChar();
 			}
+			break;
+		case 27:
+			screen.switchConsoleSettings(true);
+			menu.changeMaxCoords(1);
+			screen.printMenu(menu.pauseMenu);
+			keyListener.whatIsRunning = "pauseMenuRunning";
 			break;
 		}
 	}

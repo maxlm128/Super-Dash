@@ -10,8 +10,9 @@ public class MapLoader {
 	static String raw;
 
 //loads the entire map which is given to the method into the variable raw
-	public static void loadAll() {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(MapLoader.class.getResourceAsStream(file)));
+	public static void loadAll(String pFile) {
+		raw = null;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(MapLoader.class.getResourceAsStream(pFile)));
 		raw = new String();
 		String line;
 		try {
