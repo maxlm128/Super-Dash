@@ -8,6 +8,7 @@ public class KeyListener {
 	Console console;
 	Menu menu;
 	Screen screen;
+	Map map;
 	boolean listen = true;
 	String whatIsRunning;
 
@@ -32,6 +33,11 @@ public class KeyListener {
 // new Reference to the class Console
 	public void newConsoleReference(Console pConsole) {
 		console = pConsole;
+	}
+
+	// new Reference to the Class Map
+	public void newMapReference(Map pMap) {
+		map = pMap;
 	}
 
 // new Reference to the class Screen
@@ -68,6 +74,18 @@ public class KeyListener {
 			}
 			if (!whatIsRunning.equals("gameRunning")) {
 				delay(50);
+			}
+		}
+	}
+
+	private void executeSpikeTimer() {
+		boolean search = true;
+		int number = 0;
+		Entity entity;
+		while (search) {
+		entity = map.searchForEntity(number);
+			if(entity != null) {
+//				entity.SpikeTimer();
 			}
 		}
 	}

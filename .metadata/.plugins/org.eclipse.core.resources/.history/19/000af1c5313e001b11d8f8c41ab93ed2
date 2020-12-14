@@ -1,0 +1,41 @@
+package main;
+
+public class ExtSpike extends Entity {
+	
+int length;
+int coordsXSpikeHead;
+int coordsYSpikeHead;
+
+	public ExtSpike(char pRotation) {
+		rotation = pRotation;
+		color = 1;
+	}
+	
+	//checks for every case if something is in front of the spike
+		private boolean isSomethingInFront(char pRotation, char pContent) {
+			switch (pRotation) {
+			case 'd':
+				return Map.map[coordsXPlayer + 1][coordsYPlayer] == pContent;
+			case 's':
+				return Map.map[coordsXPlayer][coordsYPlayer + 1] == pContent;
+			case 'a':
+				return Map.map[coordsXPlayer - 1][coordsYPlayer] == pContent;
+			case 'w':
+				return Map.map[coordsXPlayer][coordsYPlayer - 1] == pContent;
+			}
+			return true;
+		}
+	
+	public void SpikeTimer() {
+		
+	}
+	
+	private void extendSpike() {
+		
+	}
+	
+	private void retractSpike() {
+		
+	}
+	
+}

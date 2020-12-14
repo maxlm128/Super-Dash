@@ -1,0 +1,14 @@
+package main;
+
+public class ExtSpike extends Entity {
+	char rotation;
+	
+	public ExtSpike(char pRotation) {
+		rotation = pRotation;
+		color = 1;
+	}
+	
+	
+	
+	
+}

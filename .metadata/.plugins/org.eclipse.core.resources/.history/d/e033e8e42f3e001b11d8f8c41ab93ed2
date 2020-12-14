@@ -1,0 +1,40 @@
+package main;
+
+import com.asecave.Console;
+
+class Map {
+	String currentMap;
+	int width;
+	int height;
+	static char[][] map;
+	static int[][] trailMap;
+	static Entity[][] entityMap;
+	Console console;
+	Player player;
+
+// creates the new array and saves the borders of the map into the new array
+	public void newMapArray(String pFile, boolean pReload) {
+		MapLoader.loadAll(pFile);
+		map = MapLoader.charsgetMap();
+		width = map.length;
+		height = map[0].length;
+		trailMap = new int[width][height];
+		entityMap = new Entity[width][height];
+		currentMap = pFile;
+		searchingLoop: for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				if (map[x][y] == 'p') {
+					player.coordsXPlayer = x;
+					player.coordsYPlayer = y;
+					map[x][y] = '<';
+					break searchingLoop;
+				}
+			}
+		}
+	}
+
+//new reference to the class Player
+	public void newPlayerReference(Player pPlayer) {
+		player = pPlayer;
+	}
+}

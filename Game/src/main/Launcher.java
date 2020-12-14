@@ -25,6 +25,7 @@ public class Launcher {
 //executes the methods which create references between the classes and starts the program
 	public Launcher() {
 		map.newPlayerReference(player);
+		map.newScreenReference(screen);
 		screen.newMapReference(map);
 		screen.newConsoleReference(console);
 		screen.newMenuReference(menu);
@@ -32,6 +33,7 @@ public class Launcher {
 		player.newScreenReference(screen);
 		player.newKeyListenerReference(keyListener);
 		player.newMenuReference(menu);
+		keyListener.newMapReference(map);
 		keyListener.newConsoleReference(console);
 		keyListener.newPlayerReference(player);
 		keyListener.newMenuReference(menu);

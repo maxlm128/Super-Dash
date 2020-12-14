@@ -83,7 +83,7 @@ public class Menu {
 	}
 
 //changes the coords of the Cursor and prints it with the method print()
-	public void printChangedCoords(boolean isUp) {
+	private void printChangedCoords(boolean isUp) {
 		screen.print(3, 10 + (coordsXCursor * 2), ' ');
 		screen.print(14, 10 + (coordsXCursor * 2), ' ');
 		if (isUp) {
