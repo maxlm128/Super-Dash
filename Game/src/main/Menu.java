@@ -18,6 +18,7 @@ public class Menu {
 	String[] creditsMenu;
 	String[] mapsMenu;
 	String[] pauseMenu;
+	String[] deadMenu;
 
 // initializing the three Arrays and the variables
 	public void startMenu() {
@@ -25,24 +26,34 @@ public class Menu {
 		mainMenu[1] = "   Play       ";
 		mainMenu[2] = " Settings     ";
 		mainMenu[3] = " Credits       ";
+		mainMenu[4] = "  Quit         ";
 		settingsMenu[0] = " Settings ";
 		settingsMenu[1] = "TailLength  " + localTailLength + " ";
 		settingsMenu[2] = "GameSpeed   " + localGameSpeed + " ";
 		settingsMenu[3] = "          ";
+		settingsMenu[4] = "          ";
 		creditsMenu[0] = "Credits";
 		creditsMenu[1] = " Asecave";
 		creditsMenu[2] = " maxlm128";
 		creditsMenu[3] = "        ";
+		creditsMenu[4] = "        ";
 		mapsMenu[0] = "Choose Maps";
 		mapsMenu[1] = "  Map 1  ";
 		mapsMenu[2] = "  Map 2  ";
 		mapsMenu[3] = "         ";
+		mapsMenu[4] = "         ";
 		pauseMenu[0] = "  Pause  ";
 		pauseMenu[1] = " To Game ";
 		pauseMenu[2] = "Main Menu";
 		pauseMenu[3] = "         ";
+		pauseMenu[4] = "         ";
+		deadMenu[0] = "   DEAD   ";
+		deadMenu[1] = "   GAME   ";
+		deadMenu[2] = "   OVER   ";
+		deadMenu[3] = "   Quit   ";
+		deadMenu[4] = "          ";
 		keyListener.whatIsRunning = "mainMenuRunning";
-		maxCoords = 2;
+		maxCoords = 3;
 		player.setGameDelay(localGameSpeed);
 		player.setTailTime(localTailLength);
 		screen.printMenu(mainMenu);
@@ -50,11 +61,12 @@ public class Menu {
 
 //creating the Arrays for the Menus main ,settings and credits
 	public Menu() {
-		mainMenu = new String[4];
-		settingsMenu = new String[4];
-		creditsMenu = new String[4];
-		mapsMenu = new String[4];
-		pauseMenu = new String[4];
+		mainMenu = new String[5];
+		settingsMenu = new String[5];
+		creditsMenu = new String[5];
+		mapsMenu = new String[5];
+		pauseMenu = new String[5];
+		deadMenu = new String[5];
 	}
 
 // new Reference to the Class map
@@ -93,6 +105,13 @@ public class Menu {
 		}
 		screen.print(3, 10 + (coordsXCursor * 2), '<');
 		screen.print(14, 10 + (coordsXCursor * 2), '>');
+	}
+
+	public void executeDeathAnimation() {
+		screen.switchConsoleSettings(true);
+		changeMaxCoords(2);
+		screen.printMenu(deadMenu);
+		keyListener.whatIsRunning = "deadMenuRunning";
 	}
 
 //changes the maximum coords for the cursor and prints it with the method printChangedCoords()
@@ -163,29 +182,32 @@ public class Menu {
 				changeMaxCoords(1);
 				screen.printMenu(creditsMenu);
 				keyListener.whatIsRunning = "creditsMenuRunning";
+			} else if (coordsXCursor == 3 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
+				keyListener.setRun(false);
 			} else if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("mapsMenuRunning")) {
 				keyListener.whatIsRunning = "gameRunning";
 				screen.switchConsoleSettings(false);
 				coordsXCursor = 1;
-				map.newMapArray("maps/Map1.txt",false);
+				map.newMapArray("maps/Map1.txt", false);
 				screen.printMap();
 			} else if (coordsXCursor == 1 && keyListener.whatIsRunning.equals("mapsMenuRunning")) {
 				keyListener.whatIsRunning = "gameRunning";
 				screen.switchConsoleSettings(false);
 				coordsXCursor = 1;
-				map.newMapArray("maps/Map2.txt",false);
+				map.newMapArray("maps/Map2.txt", false);
 				screen.printMap();
-			} else if(coordsXCursor == 0 && keyListener.whatIsRunning.equals("pauseMenuRunning")) {
+			} else if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("pauseMenuRunning")) {
 				keyListener.whatIsRunning = "gameRunning";
 				screen.switchConsoleSettings(false);
 				coordsXCursor = 1;
 				screen.printMap();
-			} else if(coordsXCursor == 1 && keyListener.whatIsRunning.equals("pauseMenuRunning")) {
+			} else if ((coordsXCursor == 1 && keyListener.whatIsRunning.equals("pauseMenuRunning"))
+					|| (coordsXCursor == 2 && keyListener.whatIsRunning.equals("deadMenuRunning"))) {
 				coordsXCursor = 0;
-				changeMaxCoords(2);
+				changeMaxCoords(3);
 				screen.printMenu(mainMenu);
-				player.coordsXPlayer = 1;
-				player.coordsYPlayer = 1;
+				player.coordsXEntity = 1;
+				player.coordsYEntity = 1;
 				keyListener.whatIsRunning = "mainMenuRunning";
 			}
 			break;
@@ -193,7 +215,7 @@ public class Menu {
 			if (keyListener.whatIsRunning.equals("settingsMenuRunning")
 					|| keyListener.whatIsRunning.equals("creditsMenuRunning")
 					|| keyListener.whatIsRunning.equals("mapsMenuRunning")) {
-				changeMaxCoords(2);
+				changeMaxCoords(3);
 				screen.printMenu(mainMenu);
 				keyListener.whatIsRunning = "mainMenuRunning";
 			}

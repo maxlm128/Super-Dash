@@ -26,10 +26,13 @@ public class Launcher {
 	public Launcher() {
 		map.newPlayerReference(player);
 		map.newScreenReference(screen);
+		map.newMenuReference(menu);
 		screen.newMapReference(map);
+		screen.newPlayerReference(player);
 		screen.newConsoleReference(console);
 		screen.newMenuReference(menu);
 		player.newConsoleReference(console);
+		player.newMapReference(map);
 		player.newScreenReference(screen);
 		player.newKeyListenerReference(keyListener);
 		player.newMenuReference(menu);
