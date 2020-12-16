@@ -1,0 +1,8 @@
+package main;
+
+public class ExtSpikeHead extends Entity {
+
+	public ExtSpikeHead() {
+		// TODO Auto-generated constructor stub
+	}
+}

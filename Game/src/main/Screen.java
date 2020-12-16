@@ -26,7 +26,7 @@ public class Screen {
 		menu = pMenu;
 	}
 
-	// new Reference to the Class map
+// new Reference to the Class map
 	public void newPlayerReference(Player pPlayer) {
 		player = pPlayer;
 	}

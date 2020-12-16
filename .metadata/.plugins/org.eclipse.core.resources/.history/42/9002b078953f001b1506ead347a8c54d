@@ -1,0 +1,8 @@
+package main;
+
+public class ExtSpikeHead extends ExtSpike{
+	
+	public ExtSpikeHead() {
+		color = 5;
+	}
+}

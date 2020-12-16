@@ -36,6 +36,7 @@ public class Launcher {
 		player.newScreenReference(screen);
 		player.newKeyListenerReference(keyListener);
 		player.newMenuReference(menu);
+		player.newPlayerReference(player);
 		keyListener.newMapReference(map);
 		keyListener.newConsoleReference(console);
 		keyListener.newPlayerReference(player);

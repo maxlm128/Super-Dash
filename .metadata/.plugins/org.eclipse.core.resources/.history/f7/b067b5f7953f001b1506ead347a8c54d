@@ -1,0 +1,10 @@
+package main;
+
+public class ExtSpikeHead extends Entity{
+	
+	public ExtSpikeHead(int coordsXEntity ,int coordsYEntity) {
+		color = 5;
+		coordsXEntity;
+		coordsYEntity;
+	}
+}

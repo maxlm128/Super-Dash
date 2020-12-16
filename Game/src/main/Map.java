@@ -67,6 +67,7 @@ class Map {
 					player.coordsXEntity = x;
 					player.coordsYEntity = y;
 					map[x][y] = '<';
+					entityMap[x][y] = player;
 				}
 			}
 		}
