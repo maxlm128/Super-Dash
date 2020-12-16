@@ -47,6 +47,15 @@ public class Player extends Entity {
 		player = pPlayer;
 	}
 
+// method delay to create a delay
+	private void delay(int pDelay) {
+		try {
+			Thread.sleep(pDelay);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 //setter for tailTime ,but with a short calculation
 	public void setTailTime(int pLocalTailLength) {
 		tailTime = pLocalTailLength * gameDelay;
@@ -208,7 +217,6 @@ public class Player extends Entity {
 				screen.printTrail(coordsXEntity - 1, coordsYEntity, true);
 			break;
 		case 27:
-			currentInput = 0;
 			screen.switchConsoleSettings(true);
 			menu.changeMaxCoords(1);
 			screen.printMenu(menu.pauseMenu);

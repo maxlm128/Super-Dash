@@ -60,7 +60,7 @@ public class KeyListener {
 		char inputChar;
 		while (run) {
 			inputChar = console.getInputChar();
-			if (inputChar != 0 && whatIsRunning.equals("gameRunning")) {
+			if ((inputChar != 0 || player.currentInput != 0)&& whatIsRunning.equals("gameRunning")) {
 				screen.switchConsoleSettings(false);
 				player.doAction(inputChar);
 			}

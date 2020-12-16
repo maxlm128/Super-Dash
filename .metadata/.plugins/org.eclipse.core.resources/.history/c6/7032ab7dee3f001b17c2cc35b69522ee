@@ -47,6 +47,15 @@ public class Player extends Entity {
 		player = pPlayer;
 	}
 
+// method delay to create a delay
+	private void delay(int pDelay) {
+		try {
+			Thread.sleep(pDelay);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 //setter for tailTime ,but with a short calculation
 	public void setTailTime(int pLocalTailLength) {
 		tailTime = pLocalTailLength * gameDelay;
@@ -148,6 +157,7 @@ public class Player extends Entity {
 		}
 		switch (pInputChar) {
 		case 'w':
+			while (true) {
 				if (isSpikeInFront('w')) {
 					currentInput = 0;
 					menu.executeDeathAnimation();
@@ -159,10 +169,16 @@ public class Player extends Entity {
 				}
 				setCoordsPlayer(coordsXEntity, coordsYEntity - 1, 'v');
 				Map.trailMap[coordsXEntity][coordsYEntity + 1] = tailTime;
+				tailTimer();
 				screen.print(coordsXEntity, coordsYEntity, color);
 				screen.printTrail(coordsXEntity, coordsYEntity + 1, true);
+				keyListener.executeSpikeTimer();
+				delay(gameDelay);
+				console.getInputChar();
+			}
 			break;
 		case 'a':
+			while (true) {
 				if (isSpikeInFront('a')) {
 					currentInput = 0;
 					menu.executeDeathAnimation();
@@ -174,10 +190,16 @@ public class Player extends Entity {
 				}
 				setCoordsPlayer(coordsXEntity - 1, coordsYEntity, '>');
 				Map.trailMap[coordsXEntity + 1][coordsYEntity] = tailTime;
+				tailTimer();
 				screen.print(coordsXEntity, coordsYEntity, color);
 				screen.printTrail(coordsXEntity + 1, coordsYEntity, true);
+				keyListener.executeSpikeTimer();
+				delay(gameDelay);
+				console.getInputChar();
+			}
 			break;
 		case 's':
+			while (true) {
 				if (isSpikeInFront('s')) {
 					currentInput = 0;
 					menu.executeDeathAnimation();
@@ -189,10 +211,16 @@ public class Player extends Entity {
 				}
 				setCoordsPlayer(coordsXEntity, coordsYEntity + 1, '^');
 				Map.trailMap[coordsXEntity][coordsYEntity - 1] = tailTime;
+				tailTimer();
 				screen.print(coordsXEntity, coordsYEntity, color);
 				screen.printTrail(coordsXEntity, coordsYEntity - 1, true);
+				keyListener.executeSpikeTimer();
+				delay(gameDelay);
+				console.getInputChar();
+			}
 			break;
 		case 'd':
+			while (true) {
 				if (isSpikeInFront('d')) {
 					currentInput = 0;
 					menu.executeDeathAnimation();
@@ -204,11 +232,15 @@ public class Player extends Entity {
 				}
 				setCoordsPlayer(coordsXEntity + 1, coordsYEntity, '<');
 				Map.trailMap[coordsXEntity - 1][coordsYEntity] = tailTime;
+				tailTimer();
 				screen.print(coordsXEntity, coordsYEntity, color);
 				screen.printTrail(coordsXEntity - 1, coordsYEntity, true);
+				keyListener.executeSpikeTimer();
+				delay(gameDelay);
+				console.getInputChar();
+			}
 			break;
 		case 27:
-			currentInput = 0;
 			screen.switchConsoleSettings(true);
 			menu.changeMaxCoords(1);
 			screen.printMenu(menu.pauseMenu);

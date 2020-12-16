@@ -9,13 +9,13 @@ public class KeyListener {
 	Menu menu;
 	Screen screen;
 	Map map;
-	boolean listen = true;
+	boolean run = true;
 	String whatIsRunning;
 
 // Setter for Listen
-	public void setListen(boolean pListen) {
-		listen = pListen;
-		if (pListen) {
+	public void setRun(boolean pRun) {
+		run = pRun;
+		if (pRun) {
 			gameLoop();
 		}
 	}
@@ -58,13 +58,14 @@ public class KeyListener {
 // executes doAction() or moveCursor() if the player pressed something
 	public void gameLoop() {
 		char inputChar;
-		while (listen) {
+		while (run) {
 			inputChar = console.getInputChar();
 			if (inputChar != 0 && whatIsRunning.equals("gameRunning")) {
 				screen.switchConsoleSettings(false);
 				player.doAction(inputChar);
 			}
 			if (whatIsRunning.equals("gameRunning")) {
+				executeSpikeTimer();
 				player.tailTimer();
 				delay(player.gameDelay);
 			}
@@ -79,10 +80,16 @@ public class KeyListener {
 	}
 
 	public void executeSpikeTimer() {
-		boolean search = true;
-		while (search) {
-			int number = 0;
-			map.searchForEntity(number);
+		int number = 0;
+		Entity entity;
+		while (true) {
+		entity = map.searchForEntity(number);
+			if(entity instanceof ExtSpike) {
+				((ExtSpike)entity).spikeTimer();
+			}else if(entity == null) {
+				break;
+			}
+			number++;
 		}
 	}
 }
