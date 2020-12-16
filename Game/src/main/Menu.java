@@ -48,10 +48,10 @@ public class Menu {
 		pauseMenu[3] = "         ";
 		pauseMenu[4] = "         ";
 		deadMenu[0] = "   DEAD   ";
-		deadMenu[1] = "   GAME   ";
-		deadMenu[2] = "   OVER   ";
-		deadMenu[3] = "   Quit   ";
-		deadMenu[4] = "          ";
+		deadMenu[1] = "   Quit   ";
+		deadMenu[2] = "          ";
+		deadMenu[3] = "   GAME   ";
+		deadMenu[4] = "   OVER   ";
 		keyListener.whatIsRunning = "mainMenuRunning";
 		maxCoords = 3;
 		player.setGameDelay(localGameSpeed);
@@ -109,7 +109,7 @@ public class Menu {
 
 	public void executeDeathAnimation() {
 		screen.switchConsoleSettings(true);
-		changeMaxCoords(2);
+		changeMaxCoords(0);
 		screen.printMenu(deadMenu);
 		keyListener.whatIsRunning = "deadMenuRunning";
 	}
@@ -202,7 +202,7 @@ public class Menu {
 				coordsXCursor = 1;
 				screen.printMap();
 			} else if ((coordsXCursor == 1 && keyListener.whatIsRunning.equals("pauseMenuRunning"))
-					|| (coordsXCursor == 2 && keyListener.whatIsRunning.equals("deadMenuRunning"))) {
+					|| (coordsXCursor == 0 && keyListener.whatIsRunning.equals("deadMenuRunning"))) {
 				coordsXCursor = 0;
 				changeMaxCoords(3);
 				screen.printMenu(mainMenu);

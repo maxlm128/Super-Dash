@@ -9,6 +9,7 @@ public class ExtSpike extends Entity {
 	int coordsXSpikeHead;
 	int coordsYSpikeHead;
 	boolean isExtending = true;
+	boolean extend = true;
 	boolean canDestroy;
 	int extentionTime = 100;
 	int spikeTimer;
@@ -19,14 +20,14 @@ public class ExtSpike extends Entity {
 		screen = pScreen;
 		menu = pMenu;
 		color = 4;
-		colorHead = 5;
+		colorHead = 4;
 	}
 
 // checks for every case if something is in front of the spike
 	private boolean isSomethingInFront(char pContent) {
 		switch (rotation) {
 		case 'd':
-			return Map.map[coordsXSpikeHead + 1][coordsYSpikeHead] != pContent;
+			return Map.map[coordsXSpikeHead + 1][coordsYSpikeHead] == pContent;
 		case 's':
 			return Map.map[coordsXSpikeHead][coordsYSpikeHead + 1] == pContent;
 		case 'a':
@@ -37,7 +38,7 @@ public class ExtSpike extends Entity {
 		return true;
 	}
 
-	private Entity whatIsInFront() {
+	private Entity whatEntityIsInFront() {
 		switch (rotation) {
 		case 'd':
 			return Map.entityMap[coordsXSpikeHead + 1][coordsYSpikeHead];
@@ -52,15 +53,21 @@ public class ExtSpike extends Entity {
 	}
 
 //a method to let the spike extend and retract alternately with a extention time between it
-	
+
 	public void spikeTimer() {
-		if (whatIsInFront() instanceof Player || whatIsInFront() instanceof Player
-				|| whatIsInFront() instanceof Player || whatIsInFront() instanceof Player) {
+		if (whatEntityIsInFront() instanceof Player || whatEntityIsInFront() instanceof Player
+				|| whatEntityIsInFront() instanceof Player || whatEntityIsInFront() instanceof Player) {
 			menu.executeDeathAnimation();
 		}
-		if (isExtending && isSomethingInFront(' ')) {
+		if (isExtending && isSomethingInFront(' ') && extend) {
 			extendSpike();
+		} else if (isExtending && isSomethingInFront('X') && extend && spikeTimer < extentionTime) {
+			breakBlock();
+			extendSpike();
+			extend = false;
+			spikeTimer++;
 		} else if (isExtending && spikeTimer < extentionTime) {
+			extend = false;
 			spikeTimer++;
 		} else if (isExtending) {
 			isExtending = false;
@@ -71,8 +78,30 @@ public class ExtSpike extends Entity {
 		} else if (!isExtending && spikeTimer < extentionTime) {
 			spikeTimer++;
 		} else if (!isExtending) {
+			extend = true;
 			isExtending = true;
 			spikeTimer = 0;
+		}
+	}
+
+	public void breakBlock() {
+		switch (rotation) {
+		case 'd':
+			Map.map[coordsXSpikeHead + 1][coordsYSpikeHead] = ' ';
+			screen.print(coordsXSpikeHead + 1, coordsYSpikeHead, 1);
+			break;
+		case 's':
+			Map.map[coordsXSpikeHead][coordsYSpikeHead + 1] = ' ';
+			screen.print(coordsXSpikeHead, coordsYSpikeHead + 1, 1);
+			break;
+		case 'a':
+			Map.map[coordsXSpikeHead - 1][coordsYSpikeHead] = ' ';
+			screen.print(coordsXSpikeHead - 1, coordsYSpikeHead, 1);
+			break;
+		case 'w':
+			Map.map[coordsXSpikeHead][coordsYSpikeHead - 1] = ' ';
+			screen.print(coordsXSpikeHead, coordsYSpikeHead - 1, 1);
+			break;
 		}
 	}
 

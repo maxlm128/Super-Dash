@@ -156,7 +156,7 @@ public class Player extends Entity {
 					menu.executeDeathAnimation();
 					break;
 				}
-				if (isSomethingInFront('w', '#')) {
+				if (!isSomethingInFront('w', ' ')) {
 					break;
 				}
 				setCoordsPlayer(coordsXEntity, coordsYEntity - 1, 'v');
@@ -175,7 +175,7 @@ public class Player extends Entity {
 					menu.executeDeathAnimation();
 					break;
 				}
-				if (isSomethingInFront('a', '#') || isSpikeInFront('a')) {
+				if (!isSomethingInFront('a', ' ')) {
 					break;
 				}
 				setCoordsPlayer(coordsXEntity - 1, coordsYEntity, '>');
@@ -194,7 +194,7 @@ public class Player extends Entity {
 					menu.executeDeathAnimation();
 					break;
 				}
-				if (isSomethingInFront('s', '#') || isSpikeInFront('s')) {
+				if (!isSomethingInFront('s', ' ')) {
 					break;
 				}
 				setCoordsPlayer(coordsXEntity, coordsYEntity + 1, '^');
@@ -213,7 +213,7 @@ public class Player extends Entity {
 					menu.executeDeathAnimation();
 					break;
 				}
-				if (isSomethingInFront('d', '#') || isSpikeInFront('d')) {
+				if (!isSomethingInFront('d', ' ')) {
 					break;
 				}
 				setCoordsPlayer(coordsXEntity + 1, coordsYEntity, '<');
