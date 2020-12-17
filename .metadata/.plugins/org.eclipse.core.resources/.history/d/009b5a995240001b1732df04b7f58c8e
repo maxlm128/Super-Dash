@@ -83,6 +83,27 @@ public class ExtSpike extends Entity {
 		}
 	}
 
+	public void breakBlock() {
+		switch (rotation) {
+		case 'd':
+			Map.map[coordsXSpikeHead + 1][coordsYSpikeHead] = ' ';
+			screen.print(coordsXSpikeHead + 1, coordsYSpikeHead, 1);
+			break;
+		case 's':
+			Map.map[coordsXSpikeHead][coordsYSpikeHead + 1] = ' ';
+			screen.print(coordsXSpikeHead, coordsYSpikeHead + 1, 1);
+			break;
+		case 'a':
+			Map.map[coordsXSpikeHead - 1][coordsYSpikeHead] = ' ';
+			screen.print(coordsXSpikeHead - 1, coordsYSpikeHead, 1);
+			break;
+		case 'w':
+			Map.map[coordsXSpikeHead][coordsYSpikeHead - 1] = ' ';
+			screen.print(coordsXSpikeHead, coordsYSpikeHead - 1, 1);
+			break;
+		}
+	}
+
 //moves the current head location by one away from the entity position
 	private void extendSpike() {
 		switch (rotation) {

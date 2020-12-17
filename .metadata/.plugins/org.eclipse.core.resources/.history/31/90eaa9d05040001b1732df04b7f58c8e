@@ -14,7 +14,7 @@ public class Player extends Entity {
 	Player player;
 
 	public Player() {
-		color = 5;
+		color = 4;
 	}
 
 // new reference to the class Console

@@ -47,6 +47,7 @@ public class Screen {
 
 //prints the map onto the screen
 	public void printMap() {
+		console.print('s');
 		console.fill(' ');
 		console.setFontSize(FontSize.NORMAL);
 		console.setBGColor(Color.BLACK);
@@ -57,8 +58,6 @@ public class Screen {
 				if (Map.map[x][y] == ('<') || Map.map[x][y] == ('^') || Map.map[x][y] == ('>')
 						|| Map.map[x][y] == ('v')) {
 					console.setFGColor(player.color);
-				} else if(Map.map[x][y] == ('X') ){
-					console.setFGColor(Color.GOLD);
 				} else {
 					console.setFGColor(Color.WHITE);
 				}
@@ -101,9 +100,9 @@ public class Screen {
 
 //requires an array and prints the array onto the screen with some settings in the console
 	public void printMenu(String[] pInhalt) {
+		console.fill(' ');
 		console.setBGColor(Color.BLACK);
 		console.setFGColor(Color.RED);
-		console.fill(' ');
 		console.setCursor(0, 1);
 		console.setCursorVisible(false);
 		console.print("                           " + pInhalt[0] + "                                    ");

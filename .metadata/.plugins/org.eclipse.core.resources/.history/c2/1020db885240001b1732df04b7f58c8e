@@ -62,6 +62,7 @@ public class ExtSpike extends Entity {
 		if (isExtending && isSomethingInFront(' ') && extend) {
 			extendSpike();
 		} else if (isExtending && isSomethingInFront('X') && extend && spikeTimer < extentionTime) {
+			breakBlock();
 			extendSpike();
 			extend = false;
 			spikeTimer++;
@@ -80,6 +81,27 @@ public class ExtSpike extends Entity {
 			extend = true;
 			isExtending = true;
 			spikeTimer = 0;
+		}
+	}
+
+	public void breakBlock() {
+		switch (rotation) {
+		case 'd':
+			Map.map[coordsXSpikeHead + 1][coordsYSpikeHead] = ' ';
+			screen.print(coordsXSpikeHead + 1, coordsYSpikeHead, 1);
+			break;
+		case 's':
+			Map.map[coordsXSpikeHead][coordsYSpikeHead + 1] = ' ';
+			screen.print(coordsXSpikeHead, coordsYSpikeHead + 1, 1);
+			break;
+		case 'a':
+			Map.map[coordsXSpikeHead - 1][coordsYSpikeHead] = ' ';
+			screen.print(coordsXSpikeHead - 1, coordsYSpikeHead, 1);
+			break;
+		case 'w':
+			Map.map[coordsXSpikeHead][coordsYSpikeHead - 1] = ' ';
+			screen.print(coordsXSpikeHead, coordsYSpikeHead - 1, 1);
+			break;
 		}
 	}
 

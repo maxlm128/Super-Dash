@@ -58,7 +58,7 @@ public class Menu {
 		player.setGameDelay(localGameSpeed);
 		player.setTailTime(localTailLength);
 		screen.printMenu(mainMenu);
-		screen.console.setBGColor(Color.BLACK);
+		screen.console.setBGColor(Color.Black);
 	}
 
 //creating the Arrays for the Menus main ,settings and credits

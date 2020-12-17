@@ -57,16 +57,13 @@ public class Screen {
 				if (Map.map[x][y] == ('<') || Map.map[x][y] == ('^') || Map.map[x][y] == ('>')
 						|| Map.map[x][y] == ('v')) {
 					console.setFGColor(player.color);
-				} else if(Map.map[x][y] == ('X') ){
+				} else if(){
 					console.setFGColor(Color.GOLD);
-				} else {
-					console.setFGColor(Color.WHITE);
-				}
+				}else {
 				console.print(Map.map[x][y]);
 			}
-			console.print("\n");
+			console.print("\n");}
 		}
-	}
 
 // prints the content of the array Map in the class with the requested content
 	public void print(int pCoordsX, int pCoordsY, char pContent) {
@@ -101,9 +98,9 @@ public class Screen {
 
 //requires an array and prints the array onto the screen with some settings in the console
 	public void printMenu(String[] pInhalt) {
+		console.fill(' ');
 		console.setBGColor(Color.BLACK);
 		console.setFGColor(Color.RED);
-		console.fill(' ');
 		console.setCursor(0, 1);
 		console.setCursorVisible(false);
 		console.print("                           " + pInhalt[0] + "                                    ");
