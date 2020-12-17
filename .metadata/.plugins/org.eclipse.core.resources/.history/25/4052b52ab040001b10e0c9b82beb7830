@@ -1,0 +1,27 @@
+package main;
+
+public class MovableBox extends Entity{
+	char content;
+	public MovableBox(int pCoordsXEntity,int pCoordsYEntity) {
+		content = '@';
+		coordsXEntity = pCoordsXEntity;
+		coordsYEntity = pCoordsYEntity;
+	}
+	
+	public void moveBox(char pRotation) {
+		switch(pRotation) {
+		case'd':
+			MovableBox box = Map.entityMap[coordsXEntity][coordsYEntity];
+			Map.entityMap[coordsXEntity][coordsYEntity] = null;
+			coordsXEntity++;
+			Map.entityMap[coordsXEntity][coordsYEntity] = 
+			break;
+		case's':
+			break;
+		case'a':
+			break;
+		case'w':
+			break;
+		}
+	}
+}

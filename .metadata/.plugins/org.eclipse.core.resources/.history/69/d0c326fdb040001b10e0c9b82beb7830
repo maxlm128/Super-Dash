@@ -1,0 +1,15 @@
+package main;
+
+public class Entity {
+	Screen screen;
+	Menu menu;
+	int color;
+	char rotation;
+	int coordsXEntity;
+	int coordsYEntity;
+	
+	public Entity(Screen pScreen, Menu pMenu) {
+		screen = pScreen;
+		menu = pMenu;
+	}
+}
