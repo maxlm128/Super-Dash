@@ -62,13 +62,13 @@ class Map {
 					extSpike.coordsXEntity = x;
 					extSpike.coordsYEntity = y;
 					extSpike.inizializeCoordsSpikeHead();
-				}else if (map[x][y] == 'p') {
+				} else if (map[x][y] == 'p') {
 					player.coordsXEntity = x;
 					player.coordsYEntity = y;
 					map[x][y] = '<';
 					entityMap[x][y] = player;
-				}else if(map[x][y] == '@') {
-					Map.entityMap[x][y] = new MovableBox(x,y,screen,menu);
+				} else if (map[x][y] == '@') {
+					Map.entityMap[x][y] = new MovableBox(x, y, screen, menu);
 				}
 			}
 		}

@@ -126,13 +126,17 @@ public class Player extends Entity {
 	private boolean isSpikeInFront(char pRotation) {
 		switch (pRotation) {
 		case 'd':
-			return Map.entityMap[coordsXEntity + 1][coordsYEntity] instanceof ExtSpike;
+			return Map.entityMap[coordsXEntity + 1][coordsYEntity] instanceof ExtSpike
+					|| Map.entityMap[coordsXEntity + 1][coordsYEntity] instanceof ExtSpikeNeck;
 		case 's':
-			return Map.entityMap[coordsXEntity][coordsYEntity + 1] instanceof ExtSpike;
+			return Map.entityMap[coordsXEntity][coordsYEntity + 1] instanceof ExtSpike
+					|| Map.entityMap[coordsXEntity][coordsYEntity + 1] instanceof ExtSpikeNeck;
 		case 'a':
-			return Map.entityMap[coordsXEntity - 1][coordsYEntity] instanceof ExtSpike;
+			return Map.entityMap[coordsXEntity - 1][coordsYEntity] instanceof ExtSpike
+					|| Map.entityMap[coordsXEntity - 1][coordsYEntity] instanceof ExtSpikeNeck;
 		case 'w':
-			return Map.entityMap[coordsXEntity][coordsYEntity - 1] instanceof ExtSpike;
+			return Map.entityMap[coordsXEntity][coordsYEntity - 1] instanceof ExtSpike
+					|| Map.entityMap[coordsXEntity][coordsYEntity - 1] instanceof ExtSpikeNeck;
 		}
 		return true;
 	}

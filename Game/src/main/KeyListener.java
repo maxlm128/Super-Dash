@@ -60,7 +60,7 @@ public class KeyListener {
 		char inputChar;
 		while (run) {
 			inputChar = console.getInputChar();
-			if ((inputChar != 0 || player.currentInput != 0)&& whatIsRunning.equals("gameRunning")) {
+			if ((inputChar != 0 || player.currentInput != 0) && whatIsRunning.equals("gameRunning")) {
 				screen.switchConsoleSettings(false);
 				player.doAction(inputChar);
 			}
@@ -83,10 +83,13 @@ public class KeyListener {
 		int number = 0;
 		Entity entity;
 		while (true) {
-		entity = map.searchForEntity(number);
-			if(entity instanceof ExtSpike) {
-				((ExtSpike)entity).spikeTimer();
-			}else if(entity == null) {
+			entity = map.searchForEntity(number);
+			screen.console.setCursor(20, 20);
+			System.out.println(entity);
+			delay(1000);
+			if (entity instanceof ExtSpike) {
+				((ExtSpike) entity).spikeTimer();
+			} else if (entity == null) {
 				break;
 			}
 			number++;
