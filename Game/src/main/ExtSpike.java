@@ -59,7 +59,7 @@ public class ExtSpike extends Entity {
 				|| whatEntityIsInFront() instanceof Player || whatEntityIsInFront() instanceof Player) {
 			menu.executeDeathAnimation();
 		}
-		if (isExtending && isSomethingInFront(' ') && extend) {
+		if (isExtending && isSomethingInFront(' ') && !(whatEntityIsInFront() instanceof MovableBox) && extend) {
 			extendSpike();
 		} else if (isExtending && isSomethingInFront('X') && extend && spikeTimer < extentionTime) {
 			extendSpike();
@@ -85,11 +85,13 @@ public class ExtSpike extends Entity {
 
 //moves the current head location by one away from the entity position
 	private void extendSpike() {
+		Entity extSpike = Map.entityMap[coordsXSpikeHead][coordsYSpikeHead];
 		switch (rotation) {
 		case 'd':
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '-';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsXSpikeHead++;
+			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpike;
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '>';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
@@ -97,6 +99,7 @@ public class ExtSpike extends Entity {
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '|';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsYSpikeHead++;
+			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpike;
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = 'v';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
@@ -104,6 +107,7 @@ public class ExtSpike extends Entity {
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '-';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsXSpikeHead--;
+			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpike;
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '<';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
@@ -111,6 +115,7 @@ public class ExtSpike extends Entity {
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '|';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsYSpikeHead--;
+			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpike;
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '^';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
@@ -124,6 +129,7 @@ public class ExtSpike extends Entity {
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = ' ';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsXSpikeHead--;
+			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = null;
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '>';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
@@ -131,6 +137,7 @@ public class ExtSpike extends Entity {
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = ' ';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsYSpikeHead--;
+			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = null;
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = 'v';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
@@ -138,6 +145,7 @@ public class ExtSpike extends Entity {
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = ' ';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsXSpikeHead++;
+			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = null;
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '<';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
@@ -145,6 +153,7 @@ public class ExtSpike extends Entity {
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = ' ';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsYSpikeHead++;
+			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = null;
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '^';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;

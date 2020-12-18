@@ -6,6 +6,7 @@ public class MovableBox extends Entity {
 	char content;
 
 	public MovableBox(int pCoordsXEntity, int pCoordsYEntity, Screen pScreen, Menu pMenu) {
+		color = 1;
 		content = '@';
 		coordsXEntity = pCoordsXEntity;
 		coordsYEntity = pCoordsYEntity;
@@ -15,58 +16,66 @@ public class MovableBox extends Entity {
 
 	public boolean moveBox(char pRotation) {
 		Entity box;
-		if(!isSomethingInFront(pRotation ,' ')) {
+		if (!isSomethingInFront(pRotation, ' ')) {
 			return false;
 		}
 		switch (pRotation) {
 		case 'd':
-			screen.print(coordsXEntity, coordsYEntity, ' ');
+			Map.map[coordsXEntity][coordsYEntity] = ' ';
+			screen.print(coordsXEntity, coordsYEntity, color);
 			box = Map.entityMap[coordsXEntity][coordsYEntity];
 			Map.entityMap[coordsXEntity][coordsYEntity] = null;
 			coordsXEntity++;
-			screen.print(coordsXEntity, coordsYEntity, '@');
+			Map.map[coordsXEntity][coordsYEntity] = '@';
+			screen.print(coordsXEntity, coordsYEntity, color);
 			Map.entityMap[coordsXEntity][coordsYEntity] = box;
 			return true;
 		case 's':
-			screen.print(coordsXEntity, coordsYEntity, ' ');
+			Map.map[coordsXEntity][coordsYEntity] = ' ';
+			screen.print(coordsXEntity, coordsYEntity, color);
 			box = Map.entityMap[coordsXEntity][coordsYEntity];
 			Map.entityMap[coordsXEntity][coordsYEntity] = null;
-			coordsXEntity++;
-			screen.print(coordsXEntity, coordsYEntity, '@');
+			coordsYEntity++;
+			Map.map[coordsXEntity][coordsYEntity] = '@';
+			screen.print(coordsXEntity, coordsYEntity, color);
 			Map.entityMap[coordsXEntity][coordsYEntity] = box;
 			return true;
 		case 'a':
-			screen.print(coordsXEntity, coordsYEntity, ' ');
+			Map.map[coordsXEntity][coordsYEntity] = ' ';
+			screen.print(coordsXEntity, coordsYEntity, color);
 			box = Map.entityMap[coordsXEntity][coordsYEntity];
 			Map.entityMap[coordsXEntity][coordsYEntity] = null;
-			coordsXEntity++;
-			screen.print(coordsXEntity, coordsYEntity, '@');
+			coordsXEntity--;
+			Map.map[coordsXEntity][coordsYEntity] = '@';
+			screen.print(coordsXEntity, coordsYEntity, color);
 			Map.entityMap[coordsXEntity][coordsYEntity] = box;
 			return true;
 		case 'w':
-			screen.print(coordsXEntity, coordsYEntity, ' ');
+			Map.map[coordsXEntity][coordsYEntity] = ' ';
+			screen.print(coordsXEntity, coordsYEntity, color);
 			box = Map.entityMap[coordsXEntity][coordsYEntity];
 			Map.entityMap[coordsXEntity][coordsYEntity] = null;
-			coordsXEntity++;
-			screen.print(coordsXEntity, coordsYEntity, '@');
+			coordsYEntity--;
+			Map.map[coordsXEntity][coordsYEntity] = '@';
+			screen.print(coordsXEntity, coordsYEntity, color);
 			Map.entityMap[coordsXEntity][coordsYEntity] = box;
 			return true;
 		}
 		return false;
 	}
-	
+
 	// checks for every case if something is in front of the spike
-		private boolean isSomethingInFront(char pRotation ,char pContent) {
-			switch (pRotation) {
-			case 'd':
-				return Map.map[coordsXEntity + 1][coordsYEntity] == pContent;
-			case 's':
-				return Map.map[coordsXEntity][coordsYEntity + 1] == pContent;
-			case 'a':
-				return Map.map[coordsXEntity - 1][coordsYEntity] == pContent;
-			case 'w':
-				return Map.map[coordsXEntity][coordsYEntity - 1] == pContent;
-			}
-			return true;
+	private boolean isSomethingInFront(char pRotation, char pContent) {
+		switch (pRotation) {
+		case 'd':
+			return Map.map[coordsXEntity + 1][coordsYEntity] == pContent;
+		case 's':
+			return Map.map[coordsXEntity][coordsYEntity + 1] == pContent;
+		case 'a':
+			return Map.map[coordsXEntity - 1][coordsYEntity] == pContent;
+		case 'w':
+			return Map.map[coordsXEntity][coordsYEntity - 1] == pContent;
 		}
+		return true;
+	}
 }

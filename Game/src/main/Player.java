@@ -109,7 +109,7 @@ public class Player extends Entity {
 		return true;
 	}
 
-	private Entity isEntityInFront(char pRotation) {
+	private Entity whichEntityInFront(char pRotation) {
 		switch (pRotation) {
 		case 'd':
 			return Map.entityMap[coordsXEntity + 1][coordsYEntity];
@@ -126,29 +126,13 @@ public class Player extends Entity {
 	private boolean isSpikeInFront(char pRotation) {
 		switch (pRotation) {
 		case 'd':
-			return Map.map[coordsXEntity + 1][coordsYEntity] == 'v' || Map.map[coordsXEntity + 1][coordsYEntity] == '>'
-					|| Map.map[coordsXEntity + 1][coordsYEntity] == '^'
-					|| Map.map[coordsXEntity + 1][coordsYEntity] == '<'
-					|| Map.map[coordsXEntity + 1][coordsYEntity] == '|'
-					|| Map.map[coordsXEntity + 1][coordsYEntity] == '-';
+			return Map.entityMap[coordsXEntity + 1][coordsYEntity] instanceof ExtSpike;
 		case 's':
-			return Map.map[coordsXEntity][coordsYEntity + 1] == 'v' || Map.map[coordsXEntity][coordsYEntity + 1] == '>'
-					|| Map.map[coordsXEntity][coordsYEntity + 1] == '^'
-					|| Map.map[coordsXEntity][coordsYEntity + 1] == '<'
-					|| Map.map[coordsXEntity][coordsYEntity + 1] == '|'
-					|| Map.map[coordsXEntity][coordsYEntity + 1] == '-';
+			return Map.entityMap[coordsXEntity][coordsYEntity + 1] instanceof ExtSpike;
 		case 'a':
-			return Map.map[coordsXEntity - 1][coordsYEntity] == 'v' || Map.map[coordsXEntity - 1][coordsYEntity] == '>'
-					|| Map.map[coordsXEntity - 1][coordsYEntity] == '^'
-					|| Map.map[coordsXEntity - 1][coordsYEntity] == '<'
-					|| Map.map[coordsXEntity - 1][coordsYEntity] == '|'
-					|| Map.map[coordsXEntity - 1][coordsYEntity] == '-';
+			return Map.entityMap[coordsXEntity - 1][coordsYEntity] instanceof ExtSpike;
 		case 'w':
-			return Map.map[coordsXEntity][coordsYEntity - 1] == 'v' || Map.map[coordsXEntity][coordsYEntity - 1] == '>'
-					|| Map.map[coordsXEntity][coordsYEntity - 1] == '^'
-					|| Map.map[coordsXEntity][coordsYEntity - 1] == '<'
-					|| Map.map[coordsXEntity][coordsYEntity - 1] == '|'
-					|| Map.map[coordsXEntity][coordsYEntity - 1] == '-';
+			return Map.entityMap[coordsXEntity][coordsYEntity - 1] instanceof ExtSpike;
 		}
 		return true;
 	}
@@ -161,27 +145,34 @@ public class Player extends Entity {
 		} else {
 			currentInput = pInputChar;
 		}
-		switch (pInputChar) {
+		method: switch (pInputChar) {
 		case 'w':
 			rotation = 'w';
-			if (isEntityInFront('w') instanceof MovableBox && ((MovableBox) isEntityInFront('w')).moveBox('w')) {
-				currentInput = 0;
-				setCoordsPlayer(coordsXEntity, coordsYEntity - 1, 'v');
-				Map.trailMap[coordsXEntity][coordsYEntity + 1] = tailTime;
-				screen.print(coordsXEntity, coordsYEntity, color);
-				screen.printTrail(coordsXEntity, coordsYEntity + 1, true);
-				break;
+			if (whichEntityInFront('w') instanceof MovableBox) {
+				if (((MovableBox) whichEntityInFront('w')).moveBox('w')) {
+					currentInput = 0;
+					setCoordsPlayer(coordsXEntity, coordsYEntity - 1, 'v');
+					Map.trailMap[coordsXEntity][coordsYEntity + 1] = tailTime;
+					screen.print(coordsXEntity, coordsYEntity, color);
+					screen.printTrail(coordsXEntity, coordsYEntity + 1, true);
+					break method;
+				} else {
+					currentInput = 0;
+					setCoordsPlayer(coordsXEntity, coordsYEntity, 'v');
+					screen.print(coordsXEntity, coordsYEntity, color);
+					break method;
+				}
 			}
 			if (isSpikeInFront('w')) {
 				currentInput = 0;
 				menu.executeDeathAnimation();
-				break;
+				break method;
 			}
 			if (!isSomethingInFront('w', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, 'v');
 				screen.print(coordsXEntity, coordsYEntity, color);
-				break;
+				break method;
 			}
 			setCoordsPlayer(coordsXEntity, coordsYEntity - 1, 'v');
 			Map.trailMap[coordsXEntity][coordsYEntity + 1] = tailTime;
@@ -190,90 +181,111 @@ public class Player extends Entity {
 			break;
 		case 'a':
 			rotation = 'a';
-			if (isEntityInFront('a') instanceof MovableBox && ((MovableBox) isEntityInFront('a')).moveBox('a')) {
-				currentInput = 0;
-				setCoordsPlayer(coordsXEntity - 1, coordsYEntity, '>');
-				Map.trailMap[coordsXEntity + 1][coordsYEntity] = tailTime;
-				screen.print(coordsXEntity, coordsYEntity, color);
-				screen.printTrail(coordsXEntity + 1, coordsYEntity, true);
-				break;
+			if (whichEntityInFront('a') instanceof MovableBox) {
+				if (((MovableBox) whichEntityInFront('a')).moveBox('a')) {
+					currentInput = 0;
+					setCoordsPlayer(coordsXEntity - 1, coordsYEntity, '>');
+					Map.trailMap[coordsXEntity + 1][coordsYEntity] = tailTime;
+					screen.print(coordsXEntity, coordsYEntity, color);
+					screen.printTrail(coordsXEntity + 1, coordsYEntity, true);
+					break method;
+				} else {
+					currentInput = 0;
+					setCoordsPlayer(coordsXEntity, coordsYEntity, '>');
+					screen.print(coordsXEntity, coordsYEntity, color);
+					break method;
+				}
 			}
 			if (isSpikeInFront('a')) {
 				currentInput = 0;
 				menu.executeDeathAnimation();
-				break;
+				break method;
 			}
 			if (!isSomethingInFront('a', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, '>');
 				screen.print(coordsXEntity, coordsYEntity, color);
-				break;
+				break method;
 			}
 			setCoordsPlayer(coordsXEntity - 1, coordsYEntity, '>');
 			Map.trailMap[coordsXEntity + 1][coordsYEntity] = tailTime;
 			screen.print(coordsXEntity, coordsYEntity, color);
 			screen.printTrail(coordsXEntity + 1, coordsYEntity, true);
-			break;
+			break method;
 		case 's':
 			rotation = 's';
-			if (isEntityInFront('s') instanceof MovableBox && ((MovableBox) isEntityInFront('s')).moveBox('s')) {
-				currentInput = 0;
-				setCoordsPlayer(coordsXEntity, coordsYEntity + 1, '^');
-				Map.trailMap[coordsXEntity][coordsYEntity - 1] = tailTime;
-				screen.print(coordsXEntity, coordsYEntity, color);
-				screen.printTrail(coordsXEntity, coordsYEntity - 1, true);
-				break;
+			if (whichEntityInFront('s') instanceof MovableBox) {
+				if (((MovableBox) whichEntityInFront('s')).moveBox('s')) {
+					currentInput = 0;
+					setCoordsPlayer(coordsXEntity, coordsYEntity + 1, '^');
+					Map.trailMap[coordsXEntity][coordsYEntity - 1] = tailTime;
+					screen.print(coordsXEntity, coordsYEntity, color);
+					screen.printTrail(coordsXEntity, coordsYEntity - 1, true);
+					break method;
+				} else {
+					currentInput = 0;
+					setCoordsPlayer(coordsXEntity, coordsYEntity, '^');
+					screen.print(coordsXEntity, coordsYEntity, color);
+					break method;
+				}
 			}
 			if (isSpikeInFront('s')) {
 				currentInput = 0;
 				menu.executeDeathAnimation();
-				break;
+				break method;
 			}
 			if (!isSomethingInFront('s', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, '^');
 				screen.print(coordsXEntity, coordsYEntity, color);
-				break;
+				break method;
 			}
 			setCoordsPlayer(coordsXEntity, coordsYEntity + 1, '^');
 			Map.trailMap[coordsXEntity][coordsYEntity - 1] = tailTime;
 			screen.print(coordsXEntity, coordsYEntity, color);
 			screen.printTrail(coordsXEntity, coordsYEntity - 1, true);
-			break;
+			break method;
 		case 'd':
 			rotation = 'd';
-			
-			if (isEntityInFront('d') instanceof MovableBox && ((MovableBox) isEntityInFront('d')).moveBox('d')) {
-				currentInput = 0;
-				setCoordsPlayer(coordsXEntity + 1, coordsYEntity, '<');
-				Map.trailMap[coordsXEntity - 1][coordsYEntity] = tailTime;
-				screen.print(coordsXEntity, coordsYEntity, color);
-				screen.printTrail(coordsXEntity - 1, coordsYEntity, true);
-				break;
+
+			if (whichEntityInFront('d') instanceof MovableBox) {
+				if (((MovableBox) whichEntityInFront('d')).moveBox('d')) {
+					currentInput = 0;
+					setCoordsPlayer(coordsXEntity + 1, coordsYEntity, '<');
+					Map.trailMap[coordsXEntity - 1][coordsYEntity] = tailTime;
+					screen.print(coordsXEntity, coordsYEntity, color);
+					screen.printTrail(coordsXEntity - 1, coordsYEntity, true);
+					break method;
+				} else {
+					currentInput = 0;
+					setCoordsPlayer(coordsXEntity, coordsYEntity, '<');
+					screen.print(coordsXEntity, coordsYEntity, color);
+					break method;
+				}
 			}
 			if (isSpikeInFront('d')) {
 				currentInput = 0;
 				menu.executeDeathAnimation();
-				break;
+				break method;
 			}
 			if (!isSomethingInFront('d', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, '<');
 				screen.print(coordsXEntity, coordsYEntity, color);
-				break;
+				break method;
 			}
 			setCoordsPlayer(coordsXEntity + 1, coordsYEntity, '<');
 			Map.trailMap[coordsXEntity - 1][coordsYEntity] = tailTime;
 			screen.print(coordsXEntity, coordsYEntity, color);
 			screen.printTrail(coordsXEntity - 1, coordsYEntity, true);
-			break;
+			break method;
 		case 27:
 			currentInput = 0;
 			screen.switchConsoleSettings(true);
 			menu.changeMaxCoords(1);
 			screen.printMenu(menu.pauseMenu);
 			keyListener.whatIsRunning = "pauseMenuRunning";
-			break;
+			break method;
 		}
 	}
 }

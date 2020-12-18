@@ -57,9 +57,11 @@ public class Screen {
 				if (Map.map[x][y] == ('<') || Map.map[x][y] == ('^') || Map.map[x][y] == ('>')
 						|| Map.map[x][y] == ('v')) {
 					console.setFGColor(player.color);
-				} else if(Map.map[x][y] == ('X') ){
+				} else if(Map.map[x][y] == ('X')){
 					console.setFGColor(Color.GOLD);
-				} else {
+				} else if(Map.map[x][y] == ('@')){
+					console.setFGColor(Map.entityMap[x][y].color);
+				}else {
 					console.setFGColor(Color.WHITE);
 				}
 				console.print(Map.map[x][y]);
