@@ -46,7 +46,7 @@ public class KeyListener {
 	}
 
 // Method delay to create a delay
-	public void delay(int pDelay) {
+	private void delay(int pDelay) {
 		try {
 			Thread.sleep(pDelay);
 		} catch (InterruptedException e) {
@@ -79,17 +79,15 @@ public class KeyListener {
 		}
 	}
 
-	public void executeSpikeTimer() {
+//searches for the entities of the type ExtSpike and executes the method spikeTimer()
+	private void executeSpikeTimer() {
 		int number = 0;
 		Entity entity;
 		while (true) {
-			entity = map.searchForEntity(number);
-			screen.console.setCursor(20, 20);
-			System.out.println(entity);
-			delay(1000);
-			if (entity instanceof ExtSpike) {
+			entity = map.searchForExtSpike(number);
+			if (entity != null) {
 				((ExtSpike) entity).spikeTimer();
-			} else if (entity == null) {
+			} else {
 				break;
 			}
 			number++;

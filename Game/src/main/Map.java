@@ -11,17 +11,17 @@ class Map {
 	Screen screen;
 	Menu menu;
 
-	// new reference to the class Player
+// new reference to the class Player
 	public void newPlayerReference(Player pPlayer) {
 		player = pPlayer;
 	}
 
-	// new reference to the class Screen
+// new reference to the class Screen
 	public void newScreenReference(Screen pScreen) {
 		screen = pScreen;
 	}
 
-	// new Reference to the class Menu
+// new Reference to the class Menu
 	public void newMenuReference(Menu pMenu) {
 		menu = pMenu;
 	}
@@ -38,46 +38,57 @@ class Map {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				ExtSpike extSpike;
-				if (map[x][y] == '<') {
+				switch(map[x][y]) {
+				case'<':
 					extSpike = new ExtSpike('a', screen, menu);
 					entityMap[x][y] = extSpike;
 					extSpike.coordsXEntity = x;
 					extSpike.coordsYEntity = y;
 					extSpike.inizializeCoordsSpikeHead();
-				} else if (map[x][y] == '^') {
+					break;
+				case'^':
 					extSpike = new ExtSpike('w', screen, menu);
 					entityMap[x][y] = extSpike;
 					extSpike.coordsXEntity = x;
 					extSpike.coordsYEntity = y;
 					extSpike.inizializeCoordsSpikeHead();
-				} else if (map[x][y] == '>') {
+					break;
+				case'>':
 					extSpike = new ExtSpike('d', screen, menu);
 					entityMap[x][y] = extSpike;
 					extSpike.coordsXEntity = x;
 					extSpike.coordsYEntity = y;
 					extSpike.inizializeCoordsSpikeHead();
-				} else if (map[x][y] == 'v') {
+					break;
+				case'v':
 					extSpike = new ExtSpike('s', screen, menu);
 					entityMap[x][y] = extSpike;
 					extSpike.coordsXEntity = x;
 					extSpike.coordsYEntity = y;
 					extSpike.inizializeCoordsSpikeHead();
-				} else if (map[x][y] == 'p') {
+					break;
+				case'p':
 					player.coordsXEntity = x;
 					player.coordsYEntity = y;
 					map[x][y] = '<';
 					entityMap[x][y] = player;
-				} else if (map[x][y] == '@') {
+					break;
+				case'@':
 					Map.entityMap[x][y] = new MovableBox(x, y, screen, menu);
+					break;
+				case'O':
+					Map.entityMap[x][y] = new FinishBlock(x,y);
+					break;
 				}
 			}
 		}
 	}
 
-	public Entity searchForEntity(int pNumber) {
+//searches for entities of the type ExtSpike and returns the (pNumber)st ExtSpike
+	public Entity searchForExtSpike(int pNumber) {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				if (entityMap[x][y] != null) {
+				if (entityMap[x][y] != null && entityMap[x][y] instanceof ExtSpike) {
 					if (pNumber == 0) {
 						return entityMap[x][y];
 					}

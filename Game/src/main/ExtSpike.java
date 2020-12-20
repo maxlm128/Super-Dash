@@ -1,9 +1,6 @@
 package main;
 
 public class ExtSpike extends Entity {
-
-	Screen screen;
-	Menu menu;
 	Entity extSpikeNeck;
 	int colorHead;
 	int length;
@@ -22,10 +19,10 @@ public class ExtSpike extends Entity {
 		menu = pMenu;
 		color = 1;
 		colorHead = 1;
-		extSpikeNeck = new ExtSpikeNeck();
+		extSpikeNeck = new ExtSpikeNeck(colorHead);
 	}
 
-// checks for every case if something is in front of the spike
+//checks for every case if something is in front of the spike
 	private boolean isSomethingInFront(char pContent) {
 		switch (rotation) {
 		case 'd':
@@ -40,6 +37,7 @@ public class ExtSpike extends Entity {
 		return true;
 	}
 
+//checks what entity is in front and return the entity
 	private Entity whatEntityIsInFront() {
 		switch (rotation) {
 		case 'd':
@@ -55,7 +53,6 @@ public class ExtSpike extends Entity {
 	}
 
 //a method to let the spike extend and retract alternately with a extention time between it
-
 	public void spikeTimer() {
 		if (whatEntityIsInFront() instanceof Player) {
 			menu.executeDeathAnimation();
@@ -84,14 +81,16 @@ public class ExtSpike extends Entity {
 		}
 	}
 
-//moves the current head location by one away from the entity position
+//moves the current head location by one away to the entity position depentend on the rotation
 	private void extendSpike() {
 		switch (rotation) {
 		case 'd':
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '-';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsXSpikeHead++;
-			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
+			if (!(Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] instanceof ExtSpike)) {
+				Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
+			}
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '>';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
@@ -99,7 +98,9 @@ public class ExtSpike extends Entity {
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '|';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsYSpikeHead++;
-			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
+			if (!(Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] instanceof ExtSpike)) {
+				Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
+			}
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = 'v';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
@@ -107,7 +108,9 @@ public class ExtSpike extends Entity {
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '-';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsXSpikeHead--;
-			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
+			if (!(Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] instanceof ExtSpike)) {
+				Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
+			}
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '<';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
@@ -115,14 +118,16 @@ public class ExtSpike extends Entity {
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '|';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsYSpikeHead--;
-			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
+			if (!(Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] instanceof ExtSpike)) {
+				Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
+			}
 			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '^';
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
 		}
 	}
 
-//moves the current head location by one to the entity position
+//moves the current head location by one to the entity position depentend on the rotation
 	private void retractSpike() {
 		switch (rotation) {
 		case 'd':
@@ -160,6 +165,7 @@ public class ExtSpike extends Entity {
 		}
 	}
 
+//inizializes the coordinates of the head 
 	public void inizializeCoordsSpikeHead() {
 		coordsXSpikeHead = coordsXEntity;
 		coordsYSpikeHead = coordsYEntity;

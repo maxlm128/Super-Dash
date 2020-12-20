@@ -1,0 +1,9 @@
+package main;
+
+//is the super class of all the entities and is stored in the array enityMap[][]
+public class Entity {
+	int color;
+	char rotation;
+	int coordsXEntity;
+	int coordsYEntity;
+}

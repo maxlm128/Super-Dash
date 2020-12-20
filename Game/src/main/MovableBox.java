@@ -1,8 +1,6 @@
 package main;
 
 public class MovableBox extends Entity {
-	Screen screen;
-	Menu menu;
 	char content;
 
 	public MovableBox(int pCoordsXEntity, int pCoordsYEntity, Screen pScreen, Menu pMenu) {
@@ -14,6 +12,7 @@ public class MovableBox extends Entity {
 		menu = pMenu;
 	}
 
+//moves the box depentend on the rotation of the player
 	public boolean moveBox(char pRotation) {
 		Entity box;
 		if (!isSomethingInFront(pRotation, ' ')) {
@@ -64,7 +63,7 @@ public class MovableBox extends Entity {
 		return false;
 	}
 
-	// checks for every case if something is in front of the spike
+// checks for every case if something is in front of the spike
 	private boolean isSomethingInFront(char pRotation, char pContent) {
 		switch (pRotation) {
 		case 'd':

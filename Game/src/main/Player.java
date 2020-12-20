@@ -6,10 +6,8 @@ public class Player extends Entity {
 	int tailTime;
 	int gameDelay;
 	char currentInput;
-	Screen screen;
 	Console console;
 	KeyListener keyListener;
-	Menu menu;
 	Map map;
 	Player player;
 
@@ -72,9 +70,7 @@ public class Player extends Entity {
 			coordsYEntity = pCoordsYPlayer;
 			screen.print(coordsXEntity, coordsYEntity, color);
 		} else {
-			Map.map[coordsXEntity][coordsYEntity] = pContent;
-			Map.entityMap[coordsXEntity][coordsYEntity] = player;
-			screen.print(coordsXEntity, coordsYEntity, color);
+			menu.executeDeathAnimation();
 		}
 	}
 
@@ -109,6 +105,7 @@ public class Player extends Entity {
 		return true;
 	}
 
+//checks which entity is in front and returns it
 	private Entity whichEntityInFront(char pRotation) {
 		switch (pRotation) {
 		case 'd':
@@ -123,6 +120,7 @@ public class Player extends Entity {
 		return null;
 	}
 
+//checks if a spike is in front and returns a boolean
 	private boolean isSpikeInFront(char pRotation) {
 		switch (pRotation) {
 		case 'd':
@@ -141,8 +139,15 @@ public class Player extends Entity {
 		return true;
 	}
 
-// checks if the keypress is one of the valid keypresses and executes multiple
-// associated methods
+//checks if the keypress is one of the valid keypresses and executes a lot of
+//associated methods with a lot of conditions ,the methods are for the keypresses a,s,d and w almost the same, but with a lot of rotation based conditions
+//the only other keypress is the escape button ,which executes the pause menu
+
+//1: when a movable box is in front of the player, the box is moved when nothing is in front of the box and the player moves also by one
+//2: when the finish block is in front of the player, the passedMenu is printed
+//3: when a spike is in front the player, the death animation is executed
+//4: when no air is in front of the player the player does not move but changes its rotation dependent on the keypress
+//5: when all this conditions are not true, the player moves normally
 	public void doAction(char pInputChar) {
 		if (currentInput != 0) {
 			pInputChar = currentInput;
@@ -152,6 +157,7 @@ public class Player extends Entity {
 		method: switch (pInputChar) {
 		case 'w':
 			rotation = 'w';
+			// 1:
 			if (whichEntityInFront('w') instanceof MovableBox) {
 				if (((MovableBox) whichEntityInFront('w')).moveBox('w')) {
 					currentInput = 0;
@@ -167,17 +173,29 @@ public class Player extends Entity {
 					break method;
 				}
 			}
+			// 2:
+			if (whichEntityInFront('w') instanceof FinishBlock) {
+				currentInput = 0;
+				screen.switchConsoleSettings(true);
+				menu.changeMaxCoords(1);
+				screen.printMenu(menu.passedMenu);
+				keyListener.whatIsRunning = "passedMenuRunning";
+				break method;
+			}
+			// 3:
 			if (isSpikeInFront('w')) {
 				currentInput = 0;
 				menu.executeDeathAnimation();
 				break method;
 			}
+			// 4:
 			if (!isSomethingInFront('w', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, 'v');
 				screen.print(coordsXEntity, coordsYEntity, color);
 				break method;
 			}
+			// 5:
 			setCoordsPlayer(coordsXEntity, coordsYEntity - 1, 'v');
 			Map.trailMap[coordsXEntity][coordsYEntity + 1] = tailTime;
 			screen.print(coordsXEntity, coordsYEntity, color);
@@ -185,6 +203,7 @@ public class Player extends Entity {
 			break;
 		case 'a':
 			rotation = 'a';
+			// 1:
 			if (whichEntityInFront('a') instanceof MovableBox) {
 				if (((MovableBox) whichEntityInFront('a')).moveBox('a')) {
 					currentInput = 0;
@@ -200,17 +219,29 @@ public class Player extends Entity {
 					break method;
 				}
 			}
+			// 2:
+			if (whichEntityInFront('a') instanceof FinishBlock) {
+				currentInput = 0;
+				screen.switchConsoleSettings(true);
+				menu.changeMaxCoords(1);
+				screen.printMenu(menu.passedMenu);
+				keyListener.whatIsRunning = "passedMenuRunning";
+				break method;
+			}
+			// 3:
 			if (isSpikeInFront('a')) {
 				currentInput = 0;
 				menu.executeDeathAnimation();
 				break method;
 			}
+			// 4:
 			if (!isSomethingInFront('a', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, '>');
 				screen.print(coordsXEntity, coordsYEntity, color);
 				break method;
 			}
+			// 5:
 			setCoordsPlayer(coordsXEntity - 1, coordsYEntity, '>');
 			Map.trailMap[coordsXEntity + 1][coordsYEntity] = tailTime;
 			screen.print(coordsXEntity, coordsYEntity, color);
@@ -218,6 +249,7 @@ public class Player extends Entity {
 			break method;
 		case 's':
 			rotation = 's';
+			// 1:
 			if (whichEntityInFront('s') instanceof MovableBox) {
 				if (((MovableBox) whichEntityInFront('s')).moveBox('s')) {
 					currentInput = 0;
@@ -233,17 +265,29 @@ public class Player extends Entity {
 					break method;
 				}
 			}
+			// 2:
+			if (whichEntityInFront('s') instanceof FinishBlock) {
+				currentInput = 0;
+				screen.switchConsoleSettings(true);
+				menu.changeMaxCoords(1);
+				screen.printMenu(menu.passedMenu);
+				keyListener.whatIsRunning = "passedMenuRunning";
+				break method;
+			}
+			// 3:
 			if (isSpikeInFront('s')) {
 				currentInput = 0;
 				menu.executeDeathAnimation();
 				break method;
 			}
+			// 4:
 			if (!isSomethingInFront('s', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, '^');
 				screen.print(coordsXEntity, coordsYEntity, color);
 				break method;
 			}
+			// 5:
 			setCoordsPlayer(coordsXEntity, coordsYEntity + 1, '^');
 			Map.trailMap[coordsXEntity][coordsYEntity - 1] = tailTime;
 			screen.print(coordsXEntity, coordsYEntity, color);
@@ -251,7 +295,7 @@ public class Player extends Entity {
 			break method;
 		case 'd':
 			rotation = 'd';
-
+			// 1:
 			if (whichEntityInFront('d') instanceof MovableBox) {
 				if (((MovableBox) whichEntityInFront('d')).moveBox('d')) {
 					currentInput = 0;
@@ -267,17 +311,29 @@ public class Player extends Entity {
 					break method;
 				}
 			}
+			// 2:
+			if (whichEntityInFront('d') instanceof FinishBlock) {
+				currentInput = 0;
+				screen.switchConsoleSettings(true);
+				menu.changeMaxCoords(1);
+				screen.printMenu(menu.passedMenu);
+				keyListener.whatIsRunning = "passedMenuRunning";
+				break method;
+			}
+			// 3:
 			if (isSpikeInFront('d')) {
 				currentInput = 0;
 				menu.executeDeathAnimation();
 				break method;
 			}
+			// 4:
 			if (!isSomethingInFront('d', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, '<');
 				screen.print(coordsXEntity, coordsYEntity, color);
 				break method;
 			}
+			// 5:
 			setCoordsPlayer(coordsXEntity + 1, coordsYEntity, '<');
 			Map.trailMap[coordsXEntity - 1][coordsYEntity] = tailTime;
 			screen.print(coordsXEntity, coordsYEntity, color);

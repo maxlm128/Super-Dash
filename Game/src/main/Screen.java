@@ -12,10 +12,6 @@ public class Screen {
 	Player player;
 	boolean flipFlop = true;
 
-	public Screen() {
-
-	}
-
 // new Reference to the Class Map
 	public void newMapReference(Map pMap) {
 		map = pMap;
@@ -36,15 +32,6 @@ public class Screen {
 		console = pConsole;
 	}
 
-// method delay to create a delay
-	public void delay(int pDelay) {
-		try {
-			Thread.sleep(pDelay);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
 //prints the map onto the screen
 	public void printMap() {
 		console.fill(' ');
@@ -57,11 +44,11 @@ public class Screen {
 				if (Map.map[x][y] == ('<') || Map.map[x][y] == ('^') || Map.map[x][y] == ('>')
 						|| Map.map[x][y] == ('v')) {
 					console.setFGColor(player.color);
-				} else if(Map.map[x][y] == ('X')){
+				} else if (Map.map[x][y] == ('X')) {
 					console.setFGColor(Color.GOLD);
-				} else if(Map.map[x][y] == ('@')){
+				} else if (Map.entityMap[x][y] instanceof MovableBox || Map.entityMap[x][y] instanceof FinishBlock) {
 					console.setFGColor(Map.entityMap[x][y].color);
-				}else {
+				} else {
 					console.setFGColor(Color.WHITE);
 				}
 				console.print(Map.map[x][y]);
@@ -114,8 +101,10 @@ public class Screen {
 			console.setCursor(3, 8 + i * 2);
 			console.print(" " + pInhalt[i]);
 		}
-		print(3, 10 + (menu.coordsXCursor * 2), '<');
-		print(14, 10 + (menu.coordsXCursor * 2), '>');
+		if (menu.maxCoords > 0) {
+			print(3, 10 + (menu.coordsXCursor * 2), '<');
+			print(14, 10 + (menu.coordsXCursor * 2), '>');
+		}
 	}
 
 //switches the settings for the console between the Game and the Menu
