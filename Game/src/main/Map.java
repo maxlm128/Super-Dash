@@ -79,6 +79,10 @@ class Map {
 				case'O':
 					Map.entityMap[x][y] = new FinishBlock(x,y);
 					break;
+				case'\\':
+				case'/':
+					Map.entityMap[x][y] = new Bouncer(map[x][y]);
+					break;
 				}
 			}
 		}

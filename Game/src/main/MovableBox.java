@@ -4,7 +4,7 @@ public class MovableBox extends Entity {
 	char content;
 
 	public MovableBox(int pCoordsXEntity, int pCoordsYEntity, Screen pScreen, Menu pMenu) {
-		color = 1;
+		color = 8;
 		content = '@';
 		coordsXEntity = pCoordsXEntity;
 		coordsYEntity = pCoordsYEntity;

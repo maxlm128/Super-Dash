@@ -5,6 +5,7 @@ import com.asecave.Console;
 public class Player extends Entity {
 	int tailTime;
 	int gameDelay;
+	int colorCycleTimer;
 	char currentInput;
 	Console console;
 	KeyListener keyListener;
@@ -12,7 +13,6 @@ public class Player extends Entity {
 	Player player;
 
 	public Player() {
-		color = 5;
 		rotation = 'd';
 	}
 
@@ -74,6 +74,10 @@ public class Player extends Entity {
 		}
 	}
 
+	public void setPlayerColor(int pColor) {
+		color = pColor;
+	}
+
 // looks for an integer in the array trailmap and sets every value thats over 
 //zero one lower and if the integer reaches zero, the trail is deleted from the 
 //screen by executing the method printTrail()
@@ -87,6 +91,17 @@ public class Player extends Entity {
 					Map.trailMap[x][y]--;
 				}
 			}
+		}
+	}
+
+	public void cycleColors() {
+		if (color < 14 && colorCycleTimer == 20) {
+			color++;
+			colorCycleTimer = 0;
+		} else if(color < 14) {
+			colorCycleTimer++;
+		} else {
+			color = 1;
 		}
 	}
 
@@ -149,9 +164,9 @@ public class Player extends Entity {
 //4: when no air is in front of the player the player does not move but changes its rotation dependent on the keypress
 //5: when all this conditions are not true, the player moves normally
 	public void doAction(char pInputChar) {
-		if (currentInput != 0) {
+		if (currentInput != 0 && pInputChar != 27) {
 			pInputChar = currentInput;
-		} else {
+		} else if(pInputChar != 27){
 			currentInput = pInputChar;
 		}
 		method: switch (pInputChar) {
@@ -163,13 +178,11 @@ public class Player extends Entity {
 					currentInput = 0;
 					setCoordsPlayer(coordsXEntity, coordsYEntity - 1, 'v');
 					Map.trailMap[coordsXEntity][coordsYEntity + 1] = tailTime;
-					screen.print(coordsXEntity, coordsYEntity, color);
 					screen.printTrail(coordsXEntity, coordsYEntity + 1, true);
 					break method;
 				} else {
 					currentInput = 0;
 					setCoordsPlayer(coordsXEntity, coordsYEntity, 'v');
-					screen.print(coordsXEntity, coordsYEntity, color);
 					break method;
 				}
 			}
@@ -182,6 +195,23 @@ public class Player extends Entity {
 				keyListener.whatIsRunning = "passedMenuRunning";
 				break method;
 			}
+			if (whichEntityInFront('w') instanceof Bouncer) {
+				if(whichEntityInFront('w').rotation == '/') {
+					setCoordsPlayer(coordsXEntity + 1, coordsYEntity - 1, '<');
+					Map.trailMap[coordsXEntity - 1][coordsYEntity + 1] = tailTime;
+					screen.printTrail(coordsXEntity - 1, coordsYEntity + 1, true);
+					rotation = 'd';
+					currentInput = 'd';
+					break method;
+				}else if(whichEntityInFront('w').rotation == '\\') {
+					setCoordsPlayer(coordsXEntity - 1, coordsYEntity - 1, '>');
+					Map.trailMap[coordsXEntity + 1][coordsYEntity + 1] = tailTime;
+					screen.printTrail(coordsXEntity + 1, coordsYEntity + 1, true);
+					rotation = 'a';
+					currentInput = 'a';
+					break method;
+				}
+			}
 			// 3:
 			if (isSpikeInFront('w')) {
 				currentInput = 0;
@@ -192,13 +222,11 @@ public class Player extends Entity {
 			if (!isSomethingInFront('w', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, 'v');
-				screen.print(coordsXEntity, coordsYEntity, color);
 				break method;
 			}
 			// 5:
 			setCoordsPlayer(coordsXEntity, coordsYEntity - 1, 'v');
 			Map.trailMap[coordsXEntity][coordsYEntity + 1] = tailTime;
-			screen.print(coordsXEntity, coordsYEntity, color);
 			screen.printTrail(coordsXEntity, coordsYEntity + 1, true);
 			break;
 		case 'a':
@@ -209,13 +237,11 @@ public class Player extends Entity {
 					currentInput = 0;
 					setCoordsPlayer(coordsXEntity - 1, coordsYEntity, '>');
 					Map.trailMap[coordsXEntity + 1][coordsYEntity] = tailTime;
-					screen.print(coordsXEntity, coordsYEntity, color);
 					screen.printTrail(coordsXEntity + 1, coordsYEntity, true);
 					break method;
 				} else {
 					currentInput = 0;
 					setCoordsPlayer(coordsXEntity, coordsYEntity, '>');
-					screen.print(coordsXEntity, coordsYEntity, color);
 					break method;
 				}
 			}
@@ -228,6 +254,23 @@ public class Player extends Entity {
 				keyListener.whatIsRunning = "passedMenuRunning";
 				break method;
 			}
+			if (whichEntityInFront('a') instanceof Bouncer) {
+				if(whichEntityInFront('a').rotation == '/') {
+					setCoordsPlayer(coordsXEntity - 1, coordsYEntity + 1, '^');
+					Map.trailMap[coordsXEntity + 1][coordsYEntity - 1] = tailTime;
+					screen.printTrail(coordsXEntity + 1, coordsYEntity - 1, true);
+					rotation = 's';
+					currentInput = 's';
+					break method;
+				}else if(whichEntityInFront('a').rotation == '\\') {
+					setCoordsPlayer(coordsXEntity - 1, coordsYEntity - 1, 'v');
+					Map.trailMap[coordsXEntity + 1][coordsYEntity + 1] = tailTime;
+					screen.printTrail(coordsXEntity + 1, coordsYEntity + 1, true);
+					rotation = 'w';
+					currentInput = 'w';
+					break method;
+				}
+			}
 			// 3:
 			if (isSpikeInFront('a')) {
 				currentInput = 0;
@@ -238,13 +281,11 @@ public class Player extends Entity {
 			if (!isSomethingInFront('a', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, '>');
-				screen.print(coordsXEntity, coordsYEntity, color);
 				break method;
 			}
 			// 5:
 			setCoordsPlayer(coordsXEntity - 1, coordsYEntity, '>');
 			Map.trailMap[coordsXEntity + 1][coordsYEntity] = tailTime;
-			screen.print(coordsXEntity, coordsYEntity, color);
 			screen.printTrail(coordsXEntity + 1, coordsYEntity, true);
 			break method;
 		case 's':
@@ -255,13 +296,11 @@ public class Player extends Entity {
 					currentInput = 0;
 					setCoordsPlayer(coordsXEntity, coordsYEntity + 1, '^');
 					Map.trailMap[coordsXEntity][coordsYEntity - 1] = tailTime;
-					screen.print(coordsXEntity, coordsYEntity, color);
 					screen.printTrail(coordsXEntity, coordsYEntity - 1, true);
 					break method;
 				} else {
 					currentInput = 0;
 					setCoordsPlayer(coordsXEntity, coordsYEntity, '^');
-					screen.print(coordsXEntity, coordsYEntity, color);
 					break method;
 				}
 			}
@@ -274,6 +313,23 @@ public class Player extends Entity {
 				keyListener.whatIsRunning = "passedMenuRunning";
 				break method;
 			}
+			if (whichEntityInFront('s') instanceof Bouncer) {
+				if(whichEntityInFront('s').rotation == '/') {
+					setCoordsPlayer(coordsXEntity - 1, coordsYEntity + 1, '>');
+					Map.trailMap[coordsXEntity + 1][coordsYEntity - 1] = tailTime;
+					screen.printTrail(coordsXEntity + 1, coordsYEntity - 1, true);
+					rotation = 'a';
+					currentInput = 'a';
+					break method;
+				}else if(whichEntityInFront('s').rotation == '\\') {
+					setCoordsPlayer(coordsXEntity + 1, coordsYEntity + 1, '<');
+					Map.trailMap[coordsXEntity - 1][coordsYEntity - 1] = tailTime;
+					screen.printTrail(coordsXEntity - 1, coordsYEntity - 1, true);
+					rotation = 'd';
+					currentInput = 'd';
+					break method;
+				}
+			}
 			// 3:
 			if (isSpikeInFront('s')) {
 				currentInput = 0;
@@ -284,13 +340,11 @@ public class Player extends Entity {
 			if (!isSomethingInFront('s', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, '^');
-				screen.print(coordsXEntity, coordsYEntity, color);
 				break method;
 			}
 			// 5:
 			setCoordsPlayer(coordsXEntity, coordsYEntity + 1, '^');
 			Map.trailMap[coordsXEntity][coordsYEntity - 1] = tailTime;
-			screen.print(coordsXEntity, coordsYEntity, color);
 			screen.printTrail(coordsXEntity, coordsYEntity - 1, true);
 			break method;
 		case 'd':
@@ -301,13 +355,11 @@ public class Player extends Entity {
 					currentInput = 0;
 					setCoordsPlayer(coordsXEntity + 1, coordsYEntity, '<');
 					Map.trailMap[coordsXEntity - 1][coordsYEntity] = tailTime;
-					screen.print(coordsXEntity, coordsYEntity, color);
 					screen.printTrail(coordsXEntity - 1, coordsYEntity, true);
 					break method;
 				} else {
 					currentInput = 0;
 					setCoordsPlayer(coordsXEntity, coordsYEntity, '<');
-					screen.print(coordsXEntity, coordsYEntity, color);
 					break method;
 				}
 			}
@@ -320,6 +372,23 @@ public class Player extends Entity {
 				keyListener.whatIsRunning = "passedMenuRunning";
 				break method;
 			}
+			if (whichEntityInFront('d') instanceof Bouncer) {
+				if(whichEntityInFront('d').rotation == '/') {
+					setCoordsPlayer(coordsXEntity + 1, coordsYEntity - 1, 'v');
+					Map.trailMap[coordsXEntity - 1][coordsYEntity + 1] = tailTime;
+					screen.printTrail(coordsXEntity - 1, coordsYEntity + 1, true);
+					rotation = 'w';
+					currentInput = 'w';
+					break method;
+				}else if(whichEntityInFront('d').rotation == '\\') {
+					setCoordsPlayer(coordsXEntity + 1, coordsYEntity + 1, '^');
+					Map.trailMap[coordsXEntity - 1][coordsYEntity - 1] = tailTime;
+					screen.printTrail(coordsXEntity - 1, coordsYEntity - 1, true);
+					rotation = 's';
+					currentInput = 's';
+					break method;
+				}
+			}
 			// 3:
 			if (isSpikeInFront('d')) {
 				currentInput = 0;
@@ -330,21 +399,21 @@ public class Player extends Entity {
 			if (!isSomethingInFront('d', ' ')) {
 				currentInput = 0;
 				setCoordsPlayer(coordsXEntity, coordsYEntity, '<');
-				screen.print(coordsXEntity, coordsYEntity, color);
 				break method;
 			}
 			// 5:
 			setCoordsPlayer(coordsXEntity + 1, coordsYEntity, '<');
 			Map.trailMap[coordsXEntity - 1][coordsYEntity] = tailTime;
-			screen.print(coordsXEntity, coordsYEntity, color);
 			screen.printTrail(coordsXEntity - 1, coordsYEntity, true);
 			break method;
 		case 27:
-			currentInput = 0;
 			screen.switchConsoleSettings(true);
 			menu.changeMaxCoords(1);
 			screen.printMenu(menu.pauseMenu);
 			keyListener.whatIsRunning = "pauseMenuRunning";
+			break method;
+		default:
+			currentInput = 0;
 			break method;
 		}
 	}

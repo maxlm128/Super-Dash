@@ -60,7 +60,7 @@ public class KeyListener {
 		char inputChar;
 		while (run) {
 			inputChar = console.getInputChar();
-			if ((inputChar != 0 || player.currentInput != 0) && whatIsRunning.equals("gameRunning")) {
+			if ((inputChar != 0 || player.currentInput != 0)  && whatIsRunning.equals("gameRunning")) {
 				screen.switchConsoleSettings(false);
 				player.doAction(inputChar);
 			}
@@ -68,6 +68,10 @@ public class KeyListener {
 				executeSpikeTimer();
 				player.tailTimer();
 				delay(player.gameDelay);
+				if(menu.currentColor == 16) {
+					player.cycleColors();
+					screen.reprintPlayer(player.color);
+				}
 			}
 			if (inputChar != 0 && !whatIsRunning.equals("gameRunning")) {
 				screen.switchConsoleSettings(true);

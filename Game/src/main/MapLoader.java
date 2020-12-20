@@ -24,7 +24,7 @@ public class MapLoader {
 		}
 	}
 
-//if executed ,the method loads the variable raw ,which was loaded in loadAll() ,into an array and returns it rotated on the x and y-axis
+//if executed ,the method loads the variable raw ,which was loaded in loadAll(), into an array by splitting raw and returns it rotated on the x and y-axis
 	public static char[][] charsgetMap() {
 		String[] lines = raw.split("\n");
 		char[][] map = new char[lines.length][];
