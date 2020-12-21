@@ -2,4 +2,5 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="com.asecave.Console.FontSize"/>
     <fullyQualifiedTypeName name="com.asecave.Console.Color"/>
+    <fullyQualifiedTypeName name="main.Map"/>
 </qualifiedTypeNameHistroy>

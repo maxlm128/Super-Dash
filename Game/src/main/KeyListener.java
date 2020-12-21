@@ -60,15 +60,16 @@ public class KeyListener {
 		char inputChar;
 		while (run) {
 			inputChar = console.getInputChar();
-			if ((inputChar != 0 || player.currentInput != 0)  && whatIsRunning.equals("gameRunning")) {
+			if ((inputChar != 0 || player.currentInput != 0) && whatIsRunning.equals("gameRunning")) {
 				screen.switchConsoleSettings(false);
 				player.doAction(inputChar);
 			}
 			if (whatIsRunning.equals("gameRunning")) {
 				executeSpikeTimer();
+				moveBlockTimer();
 				player.tailTimer();
 				delay(player.gameDelay);
-				if(menu.currentColor == 16) {
+				if (menu.currentColor == 16) {
 					player.cycleColors();
 					screen.reprintPlayer(player.color);
 				}
@@ -91,6 +92,20 @@ public class KeyListener {
 			entity = map.searchForExtSpike(number);
 			if (entity != null) {
 				((ExtSpike) entity).spikeTimer();
+			} else {
+				break;
+			}
+			number++;
+		}
+	}
+
+	private void moveBlockTimer() {
+		int number = 0;
+		Entity entity;
+		while (true) {
+			entity = map.searchForMovingBox(number);
+			if (entity != null) {
+				((MovingBox) entity).moveBlockTimer();
 			} else {
 				break;
 			}

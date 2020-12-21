@@ -38,51 +38,53 @@ class Map {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				ExtSpike extSpike;
-				switch(map[x][y]) {
-				case'<':
+				switch (map[x][y]) {
+				case '<':
 					extSpike = new ExtSpike('a', screen, menu);
 					entityMap[x][y] = extSpike;
 					extSpike.coordsXEntity = x;
 					extSpike.coordsYEntity = y;
 					extSpike.inizializeCoordsSpikeHead();
 					break;
-				case'^':
+				case '^':
 					extSpike = new ExtSpike('w', screen, menu);
 					entityMap[x][y] = extSpike;
 					extSpike.coordsXEntity = x;
 					extSpike.coordsYEntity = y;
 					extSpike.inizializeCoordsSpikeHead();
 					break;
-				case'>':
+				case '>':
 					extSpike = new ExtSpike('d', screen, menu);
 					entityMap[x][y] = extSpike;
 					extSpike.coordsXEntity = x;
 					extSpike.coordsYEntity = y;
 					extSpike.inizializeCoordsSpikeHead();
 					break;
-				case'v':
+				case 'v':
 					extSpike = new ExtSpike('s', screen, menu);
 					entityMap[x][y] = extSpike;
 					extSpike.coordsXEntity = x;
 					extSpike.coordsYEntity = y;
 					extSpike.inizializeCoordsSpikeHead();
 					break;
-				case'p':
+				case 'p':
 					player.coordsXEntity = x;
 					player.coordsYEntity = y;
 					map[x][y] = '<';
 					entityMap[x][y] = player;
 					break;
-				case'@':
+				case '@':
 					Map.entityMap[x][y] = new MovableBox(x, y, screen, menu);
 					break;
-				case'O':
-					Map.entityMap[x][y] = new FinishBlock(x,y);
+				case 'o':
+					Map.entityMap[x][y] = new FinishBlock(x, y);
 					break;
-				case'\\':
-				case'/':
+				case '\\':
+				case '/':
 					Map.entityMap[x][y] = new Bouncer(map[x][y]);
 					break;
+				case 'O':
+					Map.entityMap[x][y] = new MovingBox(screen,x,y);
 				}
 			}
 		}
@@ -93,6 +95,22 @@ class Map {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				if (entityMap[x][y] != null && entityMap[x][y] instanceof ExtSpike) {
+					if (pNumber == 0) {
+						return entityMap[x][y];
+					}
+					pNumber--;
+				}
+			}
+		}
+		return null;
+	}
+
+// searches for entities of the type MovingBox and returns the (pNumber)st
+// MovingBox
+	public Entity searchForMovingBox(int pNumber) {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				if (entityMap[x][y] != null && entityMap[x][y] instanceof MovingBox) {
 					if (pNumber == 0) {
 						return entityMap[x][y];
 					}

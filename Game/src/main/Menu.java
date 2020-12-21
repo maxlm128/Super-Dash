@@ -257,6 +257,7 @@ public class Menu {
 			} else if (coordsXCursor == 1 && keyListener.whatIsRunning.equals("pauseMenuRunning")
 					|| coordsXCursor == 0 && keyListener.whatIsRunning.equals("deadMenuRunning")
 					|| coordsXCursor == 1 && keyListener.whatIsRunning.equals("passedMenuRunning")) {
+				player.currentInput = 0;
 				coordsXCursor = 0;
 				changeMaxCoords(3);
 				screen.printMenu(mainMenu);

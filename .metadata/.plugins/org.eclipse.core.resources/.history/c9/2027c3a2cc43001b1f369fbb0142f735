@@ -1,0 +1,13 @@
+package main;
+
+public class MovingBox extends Entity{
+	boolean goingLeft;
+	
+	
+	
+
+	
+	public void BlockTimer() {
+		
+	}
+}

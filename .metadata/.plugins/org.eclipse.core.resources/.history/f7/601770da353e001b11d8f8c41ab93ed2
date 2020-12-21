@@ -1,6 +1,0 @@
-package main;
-
-public class Entity {
-	int color;
-	char rotation;
-}

@@ -3,12 +3,10 @@ package main;
 public class ExtSpike extends Entity {
 	Entity extSpikeNeck;
 	int colorHead;
-	int length;
 	int coordsXSpikeHead;
 	int coordsYSpikeHead;
 	boolean isExtending = true;
 	boolean extend = true;
-	boolean canDestroy;
 	int extentionTime = 100;
 	int spikeTimer;
 

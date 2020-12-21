@@ -5,5 +5,5 @@ public class FinishBlock extends Entity{
 		color = 9;
 		coordsXEntity = pCoordsXEntity;
 		coordsYEntity = pCoordsYEntity;
-	} 
+	}
 }
