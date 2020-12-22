@@ -8,4 +8,5 @@ public class Entity {
 	char rotation;
 	int coordsXEntity;
 	int coordsYEntity;
+	char content;
 }

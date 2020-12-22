@@ -17,7 +17,21 @@ public class ExtSpike extends Entity {
 		menu = pMenu;
 		color = 1;
 		colorHead = 1;
-		extSpikeNeck = new ExtSpikeNeck(colorHead);
+		extSpikeNeck = new ExtSpikeNeck(colorHead,rotation);
+		switch(rotation) {
+		case'd':
+			content = '>';
+			break;
+		case'a':
+			content = '<';
+			break;
+		case'w':
+			content = '^';
+			break;
+		case's':
+			content = 'v';
+			break;
+		}
 	}
 
 //checks for every case if something is in front of the spike
@@ -83,43 +97,43 @@ public class ExtSpike extends Entity {
 	private void extendSpike() {
 		switch (rotation) {
 		case 'd':
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '-';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck.content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsXSpikeHead++;
 			if (!(Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] instanceof ExtSpike)) {
 				Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
 			}
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '>';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
 		case 's':
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '|';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck.content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsYSpikeHead++;
 			if (!(Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] instanceof ExtSpike)) {
 				Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
 			}
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = 'v';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
 		case 'a':
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '-';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck.content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsXSpikeHead--;
 			if (!(Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] instanceof ExtSpike)) {
 				Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
 			}
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '<';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
 		case 'w':
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '|';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck.content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsYSpikeHead--;
 			if (!(Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] instanceof ExtSpike)) {
 				Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = extSpikeNeck;
 			}
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '^';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
 		}
@@ -133,7 +147,7 @@ public class ExtSpike extends Entity {
 			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = null;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsXSpikeHead--;
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '>';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
 		case 's':
@@ -141,7 +155,7 @@ public class ExtSpike extends Entity {
 			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = null;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsYSpikeHead--;
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = 'v';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
 		case 'a':
@@ -149,7 +163,7 @@ public class ExtSpike extends Entity {
 			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = null;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsXSpikeHead++;
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '<';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
 		case 'w':
@@ -157,7 +171,7 @@ public class ExtSpike extends Entity {
 			Map.entityMap[coordsXSpikeHead][coordsYSpikeHead] = null;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, color);
 			coordsYSpikeHead++;
-			Map.map[coordsXSpikeHead][coordsYSpikeHead] = '^';
+			Map.map[coordsXSpikeHead][coordsYSpikeHead] = content;
 			screen.print(coordsXSpikeHead, coordsYSpikeHead, colorHead);
 			break;
 		}

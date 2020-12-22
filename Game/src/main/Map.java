@@ -76,15 +76,18 @@ class Map {
 				case '@':
 					Map.entityMap[x][y] = new MovableBox(x, y, screen, menu);
 					break;
-				case 'o':
+				case 'O':
 					Map.entityMap[x][y] = new FinishBlock(x, y);
 					break;
 				case '\\':
 				case '/':
 					Map.entityMap[x][y] = new Bouncer(map[x][y]);
 					break;
-				case 'O':
-					Map.entityMap[x][y] = new MovingBox(screen,x,y);
+				case '-':
+				case '|':
+					Map.entityMap[x][y] = new MovingBox(screen, x, y, map[x][y]);
+					map[x][y] = 'o';
+					break;
 				}
 			}
 		}

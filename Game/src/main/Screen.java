@@ -40,6 +40,7 @@ public class Screen {
 		console.setFGColor(Color.WHITE);
 		console.setCursorVisible(false);
 		for (int y = 0; y < map.height; y++) {
+			method:
 			for (int x = 0; x < map.width; x++) {
 				if(Map.trailMap[x][y] > 0) {
 					console.setBGColor(Color.WHITE);
@@ -48,6 +49,9 @@ public class Screen {
 					console.setFGColor(8);
 				} else if (Map.entityMap[x][y] != null) {
 					console.setFGColor(Map.entityMap[x][y].color);
+					console.print(Map.entityMap[x][y].content);
+					console.setBGColor(Color.BLACK);
+					break method;
 				} else {
 					console.setFGColor(Color.WHITE);
 				}
