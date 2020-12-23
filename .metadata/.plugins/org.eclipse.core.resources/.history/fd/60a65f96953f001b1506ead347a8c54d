@@ -1,8 +1,0 @@
-package main;
-
-public class ExtSpikeHead extends ExtSpike {
-
-	public ExtSpikeHead() {
-		// TODO Auto-generated constructor stub
-	}
-}

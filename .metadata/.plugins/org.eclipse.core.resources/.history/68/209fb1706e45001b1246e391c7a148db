@@ -48,12 +48,12 @@ public class Screen {
 					console.setFGColor(Map.entityMap[x][y].color);
 					console.print(Map.entityMap[x][y].content);
 					console.setBGColor(Color.BLACK);
-				} else if (Map.map[x][y] == 'X') {
+				} else if (Map.map[x][y] == ('X')) {
 					console.setFGColor(8);
-					console.print(Map.map[x][y]);
 				} else {
 					console.setFGColor(Color.WHITE);
 					console.print(Map.map[x][y]);
+					console.setBGColor(Color.BLACK);
 				}
 			}
 			console.print("\n");

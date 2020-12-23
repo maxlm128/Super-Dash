@@ -363,14 +363,14 @@ public class Player extends Entity {
 				}
 			}
 			// 4:
+			if (whichEntityInFront() instanceof MovingBall) {
+				((MovingBall) whichEntityInFront()).rotation = '|';
+			}
+			// 5:
 			if (isSpikeInFront()) {
 				currentInput = 0;
 				menu.executeDeathAnimation();
 				break method;
-			}
-			// 5:
-			if (whichEntityInFront() instanceof MovingBall) {
-				((MovingBall) whichEntityInFront()).rotation = '|';
 			}
 			// 6:
 			if (!isSomethingInFront(' ')) {
@@ -427,14 +427,14 @@ public class Player extends Entity {
 				}
 			}
 			// 4:
+			if (whichEntityInFront() instanceof MovingBall) {
+				((MovingBall) whichEntityInFront()).rotation = '-';
+			}
+			// 5:
 			if (isSpikeInFront()) {
 				currentInput = 0;
 				menu.executeDeathAnimation();
 				break method;
-			}
-			// 5:
-			if (whichEntityInFront() instanceof MovingBall) {
-				((MovingBall) whichEntityInFront()).rotation = '-';
 			}
 			// 6:
 			if (!isSomethingInFront(' ')) {

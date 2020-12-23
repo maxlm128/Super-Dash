@@ -41,20 +41,22 @@ public class Screen {
 		console.setCursorVisible(false);
 		for (int y = 0; y < map.height; y++) {
 			for (int x = 0; x < map.width; x++) {
-				if (Map.trailMap[x][y] > 0) {
+				method:
+				if(Map.trailMap[x][y] > 0) {
 					console.setBGColor(Color.WHITE);
 				}
-				if (Map.entityMap[x][y] != null) {
+				if (Map.map[x][y] == ('X')) {
+					console.setFGColor(8);
+				} else if (Map.entityMap[x][y] != null) {
 					console.setFGColor(Map.entityMap[x][y].color);
 					console.print(Map.entityMap[x][y].content);
 					console.setBGColor(Color.BLACK);
-				} else if (Map.map[x][y] == 'X') {
-					console.setFGColor(8);
-					console.print(Map.map[x][y]);
+					break method;
 				} else {
 					console.setFGColor(Color.WHITE);
-					console.print(Map.map[x][y]);
 				}
+				console.print(Map.map[x][y]);
+				console.setBGColor(Color.BLACK);
 			}
 			console.print("\n");
 		}

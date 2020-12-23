@@ -85,7 +85,7 @@ class Map {
 					break;
 				case '-':
 				case '|':
-					Map.entityMap[x][y] = new MovingBall(screen, x, y, map[x][y]);
+					Map.entityMap[x][y] = new MovingBox(screen, x, y, map[x][y]);
 					map[x][y] = 'o';
 					break;
 				}
@@ -113,7 +113,7 @@ class Map {
 	public Entity searchForMovingBox(int pNumber) {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				if (entityMap[x][y] != null && entityMap[x][y] instanceof MovingBall) {
+				if (entityMap[x][y] != null && entityMap[x][y] instanceof MovingBox) {
 					if (pNumber == 0) {
 						return entityMap[x][y];
 					}

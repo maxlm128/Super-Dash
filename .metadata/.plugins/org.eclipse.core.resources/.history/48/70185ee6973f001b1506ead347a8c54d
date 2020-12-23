@@ -1,8 +1,0 @@
-package main;
-
-public class ExtSpikeHead extends Entity{
-	
-	public ExtSpikeHead() {
-		color = 5;
-	}
-}

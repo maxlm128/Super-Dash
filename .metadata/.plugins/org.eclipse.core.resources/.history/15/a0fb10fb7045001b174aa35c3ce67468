@@ -85,7 +85,7 @@ class Map {
 					break;
 				case '-':
 				case '|':
-					Map.entityMap[x][y] = new MovingBall(screen, x, y, map[x][y]);
+					Map.entityMap[x][y] = new MovingBox(screen, x, y, map[x][y]);
 					map[x][y] = 'o';
 					break;
 				}
