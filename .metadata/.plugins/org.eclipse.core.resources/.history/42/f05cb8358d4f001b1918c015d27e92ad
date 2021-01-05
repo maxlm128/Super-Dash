@@ -34,7 +34,7 @@ public class MovingBall extends Entity {
 	}
 
 //a method which controls whether the ball should move forward or back
-	public void ballTimer() {
+	public void moveBlockTimer() {
 		if (0 < movingTimer && movingTimer < movingDelay) {
 			movingTimer--;
 		} else if (movingTimer < 1) {
@@ -52,7 +52,6 @@ public class MovingBall extends Entity {
 		}
 	}
 
-//moves the ball one away by adding one to the x or y coordinate and prints the ball onto the screen
 	public void moveBlockAway() {
 		MovingBall movingBox = (MovingBall) Map.entityMap[coordsXEntity][coordsYEntity];
 		switch (rotation) {
@@ -77,7 +76,6 @@ public class MovingBall extends Entity {
 		}
 	}
 
-//moves the ball one back by subtracting one from the x or y coordinate and prints the ball onto the screen
 	public void moveBlockBack() {
 		MovingBall movingBox = (MovingBall) Map.entityMap[coordsXEntity][coordsYEntity];
 		switch (rotation) {

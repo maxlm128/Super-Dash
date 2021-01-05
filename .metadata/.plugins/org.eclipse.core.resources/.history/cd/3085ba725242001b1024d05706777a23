@@ -1,9 +1,0 @@
-package main;
-
-public class FinishBlock extends Entity{
-	public FinishBlock(int pCoordsXEntity,int pCoordsYEntity,int pColor) {
-		color = pColor;
-		coordsXEntity = pCoordsXEntity;
-		coordsYEntity = pCoordsYEntity;
-	} 
-}

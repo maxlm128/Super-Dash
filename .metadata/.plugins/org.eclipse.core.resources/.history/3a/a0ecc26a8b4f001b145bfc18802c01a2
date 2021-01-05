@@ -129,20 +129,16 @@ public class Menu {
 	}
 
 //changes the coords of the Cursor and prints it with the method print()
-	private void printChangedCoords(boolean isUp, boolean print) {
-		if (print) {
-			screen.print(3, 10 + (coordsXCursor * 2), ' ');
-			screen.print(14, 10 + (coordsXCursor * 2), ' ');
-		}
+	private void printChangedCoords(boolean isUp ,boolean print) {
+		screen.print(3, 10 + (coordsXCursor * 2), ' ');
+		screen.print(14, 10 + (coordsXCursor * 2), ' ');
 		if (isUp) {
 			coordsXCursor--;
 		} else {
 			coordsXCursor++;
 		}
-		if (print) {
-			screen.print(3, 10 + (coordsXCursor * 2), '<');
-			screen.print(14, 10 + (coordsXCursor * 2), '>');
-		}
+		screen.print(3, 10 + (coordsXCursor * 2), '<');
+		screen.print(14, 10 + (coordsXCursor * 2), '>');
 	}
 
 //executes the death animation
@@ -168,13 +164,13 @@ public class Menu {
 			if (coordsXCursor == 0) {
 				break;
 			}
-			printChangedCoords(true, true);
+			printChangedCoords(true);
 			break;
 		case 's':
 			if (coordsXCursor == maxCoords) {
 				break;
 			}
-			printChangedCoords(false, true);
+			printChangedCoords(false);
 			break;
 		case 'd':
 			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning") && localTailLength < 99) {

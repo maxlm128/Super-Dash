@@ -71,14 +71,15 @@ public class Screen {
 		console.print(pContent);
 	}
 
-//reprints the player with its current color and cycles the color
 	public void reprintPlayer() {
+		if(menu.currentColor == 16) {
 			player.cycleColors();
 			console.setFGColor(player.color);
 			console.setCursorVisible(false);
 			console.setCursor(player.coordsXEntity, player.coordsYEntity);
 			console.print(Map.map[player.coordsXEntity][player.coordsYEntity]);
 			console.setFGColor(Color.WHITE);
+		}
 	}
 
 // prints the content of the array Map in the class with the requested color

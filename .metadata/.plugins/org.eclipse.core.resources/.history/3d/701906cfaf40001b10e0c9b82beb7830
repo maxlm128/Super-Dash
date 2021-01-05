@@ -1,8 +1,0 @@
-package main;
-
-public class MovableBox extends Entity{
-	char content;
-	public MovableBox() {
-		content = '@';
-	}
-}

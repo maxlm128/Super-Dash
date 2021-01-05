@@ -71,7 +71,6 @@ public class Screen {
 		console.print(pContent);
 	}
 
-//reprints the player with its current color and cycles the color
 	public void reprintPlayer() {
 			player.cycleColors();
 			console.setFGColor(player.color);

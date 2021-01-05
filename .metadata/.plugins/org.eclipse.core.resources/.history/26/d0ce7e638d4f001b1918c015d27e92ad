@@ -110,7 +110,7 @@ class Map {
 
 // searches for entities of the type MovingBox and returns the (pNumber)st
 // MovingBox
-	public Entity searchForMovingBall(int pNumber) {
+	public Entity searchForMovingBox(int pNumber) {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				if (entityMap[x][y] != null && entityMap[x][y] instanceof MovingBall) {

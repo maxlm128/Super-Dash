@@ -98,14 +98,14 @@ public class KeyListener {
 		}
 	}
 
-//searches for the entities of the type MovingBall and executes the method ballTimer()
+//searches for the entities of the type MovingBall and executes the method 
 	private void executeBallTimer() {
 		int number = 0;
 		Entity entity;
 		while (true) {
 			entity = map.searchForMovingBall(number);
 			if (entity != null) {
-				((MovingBall) entity).ballTimer();
+				((MovingBall) entity).BallTimer();
 			} else {
 				break;
 			}

@@ -129,35 +129,31 @@ public class Menu {
 	}
 
 //changes the coords of the Cursor and prints it with the method print()
-	private void printChangedCoords(boolean isUp, boolean print) {
-		if (print) {
-			screen.print(3, 10 + (coordsXCursor * 2), ' ');
-			screen.print(14, 10 + (coordsXCursor * 2), ' ');
-		}
+	private void printChangedCoords(boolean isUp) {
+		screen.print(3, 10 + (coordsXCursor * 2), ' ');
+		screen.print(14, 10 + (coordsXCursor * 2), ' ');
 		if (isUp) {
 			coordsXCursor--;
 		} else {
 			coordsXCursor++;
 		}
-		if (print) {
-			screen.print(3, 10 + (coordsXCursor * 2), '<');
-			screen.print(14, 10 + (coordsXCursor * 2), '>');
-		}
+		screen.print(3, 10 + (coordsXCursor * 2), '<');
+		screen.print(14, 10 + (coordsXCursor * 2), '>');
 	}
 
 //executes the death animation
 	public void executeDeathAnimation() {
 		screen.switchConsoleSettings(true);
-		changeMaxCoords(0, false);
+		changeMaxCoords(0,false);
 		screen.printMenu(deadMenu);
 		keyListener.whatIsRunning = "deadMenuRunning";
 	}
 
 //changes the maximum coords for the cursor and prints it with the method printChangedCoords()
-	public void changeMaxCoords(int pMaxCoords, boolean print) {
+	public void changeMaxCoords(int pMaxCoords,boolean print) {
 		maxCoords = pMaxCoords;
-		while (maxCoords < coordsXCursor) {
-			printChangedCoords(true, print);
+		while (maxCoords < coordsXCursor && print) {
+			printChangedCoords(true);
 		}
 	}
 
@@ -168,13 +164,13 @@ public class Menu {
 			if (coordsXCursor == 0) {
 				break;
 			}
-			printChangedCoords(true, true);
+			printChangedCoords(true);
 			break;
 		case 's':
 			if (coordsXCursor == maxCoords) {
 				break;
 			}
-			printChangedCoords(false, true);
+			printChangedCoords(false);
 			break;
 		case 'd':
 			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning") && localTailLength < 99) {
@@ -226,15 +222,15 @@ public class Menu {
 			break;
 		case 13:
 			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
-				changeMaxCoords(1, true);
+				changeMaxCoords(1);
 				screen.printMenu(mapsMenu);
 				keyListener.whatIsRunning = "mapsMenuRunning";
 			} else if (coordsXCursor == 1 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
-				changeMaxCoords(2, true);
+				changeMaxCoords(2);
 				screen.printMenu(settingsMenu);
 				keyListener.whatIsRunning = "settingsMenuRunning";
 			} else if (coordsXCursor == 2 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
-				changeMaxCoords(0, true);
+				changeMaxCoords(0);
 				screen.printMenu(creditsMenu);
 				keyListener.whatIsRunning = "creditsMenuRunning";
 			} else if (coordsXCursor == 3 && keyListener.whatIsRunning.equals("mainMenuRunning")) {
@@ -263,7 +259,7 @@ public class Menu {
 					|| coordsXCursor == 1 && keyListener.whatIsRunning.equals("passedMenuRunning")) {
 				player.currentInput = 0;
 				coordsXCursor = 0;
-				changeMaxCoords(3, true);
+				changeMaxCoords(3);
 				screen.printMenu(mainMenu);
 				player.coordsXEntity = 1;
 				player.coordsYEntity = 1;
@@ -278,7 +274,7 @@ public class Menu {
 					screen.printMap();
 				} else {
 					coordsXCursor = 0;
-					changeMaxCoords(3, true);
+					changeMaxCoords(3);
 					screen.printMenu(mainMenu);
 					player.coordsXEntity = 1;
 					player.coordsYEntity = 1;
@@ -290,7 +286,7 @@ public class Menu {
 			if (keyListener.whatIsRunning.equals("settingsMenuRunning")
 					|| keyListener.whatIsRunning.equals("creditsMenuRunning")
 					|| keyListener.whatIsRunning.equals("mapsMenuRunning")) {
-				changeMaxCoords(3, true);
+				changeMaxCoords(3);
 				screen.printMenu(mainMenu);
 				keyListener.whatIsRunning = "mainMenuRunning";
 			}

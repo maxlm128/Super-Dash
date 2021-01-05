@@ -94,7 +94,6 @@ public class Player extends Entity {
 		}
 	}
 
-//setter for the player color
 	public void setPlayerColor(int pColor) {
 		color = pColor;
 	}

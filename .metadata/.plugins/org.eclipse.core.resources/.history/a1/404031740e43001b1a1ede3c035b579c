@@ -1,7 +1,0 @@
-package main;
-
-public class Bouncer extends Entity{
-	public Bouncer(char pRotation) {
-		// TODO Auto-generated constructor stub
-	}
-}

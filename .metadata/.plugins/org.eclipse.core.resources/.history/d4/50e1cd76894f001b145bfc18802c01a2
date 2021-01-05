@@ -47,9 +47,7 @@ public class Screen {
 				if (Map.entityMap[x][y] != null) {
 					console.setFGColor(Map.entityMap[x][y].color);
 					console.print(Map.entityMap[x][y].content);
-					if((Map.entityMap[x][y].content) == 0) {
-						console.print('0');
-					}
+					console.print(Map.entityMap[x][y].content);
 					console.setBGColor(Color.BLACK);
 				} else if (Map.map[x][y] == 'X') {
 					console.setFGColor(8);
@@ -71,14 +69,15 @@ public class Screen {
 		console.print(pContent);
 	}
 
-//reprints the player with its current color and cycles the color
 	public void reprintPlayer() {
+		if(menu.currentColor == 16) {
 			player.cycleColors();
 			console.setFGColor(player.color);
 			console.setCursorVisible(false);
 			console.setCursor(player.coordsXEntity, player.coordsYEntity);
 			console.print(Map.map[player.coordsXEntity][player.coordsYEntity]);
 			console.setFGColor(Color.WHITE);
+		}
 	}
 
 // prints the content of the array Map in the class with the requested color

@@ -168,13 +168,13 @@ public class Menu {
 			if (coordsXCursor == 0) {
 				break;
 			}
-			printChangedCoords(true, true);
+			printChangedCoords(true);
 			break;
 		case 's':
 			if (coordsXCursor == maxCoords) {
 				break;
 			}
-			printChangedCoords(false, true);
+			printChangedCoords(false);
 			break;
 		case 'd':
 			if (coordsXCursor == 0 && keyListener.whatIsRunning.equals("settingsMenuRunning") && localTailLength < 99) {

@@ -25,7 +25,7 @@ public class MovableBox extends Entity {
 			box = Map.entityMap[coordsXEntity][coordsYEntity];
 			Map.entityMap[coordsXEntity][coordsYEntity] = null;
 			coordsXEntity++;
-			Map.map[coordsXEntity][coordsYEntity] = '@';
+			Map.map[coordsXEntity][coordsYEntity] = content;
 			screen.print(coordsXEntity, coordsYEntity, color);
 			Map.entityMap[coordsXEntity][coordsYEntity] = box;
 			return true;
@@ -35,7 +35,7 @@ public class MovableBox extends Entity {
 			box = Map.entityMap[coordsXEntity][coordsYEntity];
 			Map.entityMap[coordsXEntity][coordsYEntity] = null;
 			coordsYEntity++;
-			Map.map[coordsXEntity][coordsYEntity] = '@';
+			Map.map[coordsXEntity][coordsYEntity] = content;
 			screen.print(coordsXEntity, coordsYEntity, color);
 			Map.entityMap[coordsXEntity][coordsYEntity] = box;
 			return true;
@@ -45,7 +45,7 @@ public class MovableBox extends Entity {
 			box = Map.entityMap[coordsXEntity][coordsYEntity];
 			Map.entityMap[coordsXEntity][coordsYEntity] = null;
 			coordsXEntity--;
-			Map.map[coordsXEntity][coordsYEntity] = '@';
+			Map.map[coordsXEntity][coordsYEntity] = content;
 			screen.print(coordsXEntity, coordsYEntity, color);
 			Map.entityMap[coordsXEntity][coordsYEntity] = box;
 			return true;
@@ -55,7 +55,7 @@ public class MovableBox extends Entity {
 			box = Map.entityMap[coordsXEntity][coordsYEntity];
 			Map.entityMap[coordsXEntity][coordsYEntity] = null;
 			coordsYEntity--;
-			Map.map[coordsXEntity][coordsYEntity] = '@';
+			Map.map[coordsXEntity][coordsYEntity] = content;
 			screen.print(coordsXEntity, coordsYEntity, color);
 			Map.entityMap[coordsXEntity][coordsYEntity] = box;
 			return true;

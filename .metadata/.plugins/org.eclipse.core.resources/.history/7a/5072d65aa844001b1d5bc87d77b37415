@@ -1,7 +1,0 @@
-package main;
-
-public class ExtSpikeNeck extends Entity{
-	public ExtSpikeNeck(int pColor,char rotation) {
-		color = pColor;
-	}
-}

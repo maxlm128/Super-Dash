@@ -66,12 +66,10 @@ public class KeyListener {
 			}
 			if (whatIsRunning.equals("gameRunning")) {
 				executeSpikeTimer();
-				executeBallTimer();
+				moveBlockTimer();
 				player.tailTimer();
 				delay(player.gameDelay);
-				if (menu.currentColor == 16) {
-					screen.reprintPlayer();
-				}
+				screen.reprintPlayer();
 			}
 			if (inputChar != 0 && !whatIsRunning.equals("gameRunning")) {
 				screen.switchConsoleSettings(true);
@@ -98,14 +96,13 @@ public class KeyListener {
 		}
 	}
 
-//searches for the entities of the type MovingBall and executes the method ballTimer()
-	private void executeBallTimer() {
+	private void moveBlockTimer() {
 		int number = 0;
 		Entity entity;
 		while (true) {
-			entity = map.searchForMovingBall(number);
+			entity = map.searchForMovingBox(number);
 			if (entity != null) {
-				((MovingBall) entity).ballTimer();
+				((MovingBall) entity).moveBlockTimer();
 			} else {
 				break;
 			}

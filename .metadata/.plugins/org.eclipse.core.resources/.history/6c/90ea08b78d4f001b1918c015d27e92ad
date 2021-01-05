@@ -34,7 +34,7 @@ public class MovingBall extends Entity {
 	}
 
 //a method which controls whether the ball should move forward or back
-	public void ballTimer() {
+	public void BallTimer() {
 		if (0 < movingTimer && movingTimer < movingDelay) {
 			movingTimer--;
 		} else if (movingTimer < 1) {
